@@ -5,7 +5,6 @@ import BookListItem from './BookListItem';
 
 const BookList = () => {
     const list = useSelector(state => state.bookReducer.books);
-    console.log(list);
     return (<section>
         <table>
             <thead>
@@ -22,7 +21,7 @@ const BookList = () => {
             <tbody>
                {list.map((item:any) => { 
                    return (<BookListItem 
-                    key={item.isbn}
+                    key={item.id}
                     authors={item.authors}
                     isbn={item.isbn}
                     publisher={item.publisher}
