@@ -26,19 +26,23 @@ interface GetBookListDBActionFail {
     payload: string
 }
 
-export const getBookListDB = () => ({
+export const getBookListDB = ():GetBookListDBAction => ({
     type: types.GET_LIST_DB_REQUEST,
 })
 
 // //data 타입 확인
-export const getBooklistDBSuccess = (payload:[]) => ({
+export const getBookListDBSuccess = (payload:[]):GetBookListDBSuccessAction => ({
     type: types.GET_LIST_DB_SUCCESS,
     payload: payload
-   
 });
 
+export const getBookListDBFail = (payload:string):GetBookListDBActionFail => ({
+    type: types.GET_LIST_DB_FAIL,
+    payload: payload
+})
+
 export type BookActionsTypes =
-    | GetBookListDBAction
-    | GetBookListDBSuccessAction
-    | GetBookListDBActionFail;
+    | ReturnType<typeof getBookListDB>
+    | ReturnType<typeof getBookListDBSuccess>
+    | ReturnType<typeof getBookListDBFail>;
 
