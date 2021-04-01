@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootSaga from 'modules/sagas/index';
 import { Provider } from 'react-redux';
+import './App.scss';
 
 // create saga middleware
 const sagaMiddleware = createSagaMiddleware(); 
