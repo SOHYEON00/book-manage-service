@@ -4,7 +4,10 @@ import { dbService } from "fBase";
 
 
 export const getBooks = async() => {
-    return ((await dbService.collection('books').get()).docs).map(doc => doc.data());;
+    return ((await dbService.collection('books').get()).docs).map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }));;
 }
 
 
