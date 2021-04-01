@@ -1,7 +1,7 @@
 import * as types from '../types';
 import * as api from '../api';
 import {call, put} from 'redux-saga/effects';
-import { getBooklistDBSuccess } from 'modules/actions/book_action';
+import { getBookListDBSuccess } from 'modules/actions/book_action';
 
 
 
@@ -14,7 +14,7 @@ export function* getBookListDBSaga() {
         const response:[]= yield call(api.getBooks);
 
         // 전달받은 books를 스토어에 전달하기 위해 success 액션 디스패치
-        yield put(getBooklistDBSuccess(response)); 
+        yield put(getBookListDBSuccess(response)); 
         
         
     } catch (error) {

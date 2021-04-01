@@ -5,7 +5,7 @@ import BookListItem from './BookListItem';
 
 const BookList = () => {
     const list = useSelector(state => state.bookReducer.books);
-
+    console.log(list);
     return (<section>
         <table>
             <thead>
