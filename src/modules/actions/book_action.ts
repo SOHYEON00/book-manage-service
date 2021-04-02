@@ -31,9 +31,9 @@ export const getBookListDB = ():GetBookListDBAction => ({
 })
 
 // //data 타입 확인
-export const getBookListDBSuccess = (payload:[]):GetBookListDBSuccessAction => ({
+export const getBookListDBSuccess = (bookList:[]):GetBookListDBSuccessAction => ({
     type: types.GET_LIST_DB_SUCCESS,
-    payload: payload
+    payload: bookList
 });
 
 export const getBookListDBFail = (payload:string):GetBookListDBActionFail => ({
