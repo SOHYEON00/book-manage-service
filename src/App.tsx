@@ -51,10 +51,21 @@ const App = () => {
   //       })
   //   }; 
 
+  const mainStyle = {
+    padding: '6rem 3rem',
+    backgroundColor: '#f0f2f5',
+  };
+
+  const titleStyle = {
+    fontSize: '1.4rem',
+    color: '#4b5258'
+  };
+
+
   return (
     <>
-      <main>
-        <h2>도서 관리 서비스</h2>
+      <main style={mainStyle}>
+        <p style={titleStyle}>도서 관리 서비스</p>
         <Nav />
         <BookList />
       </main>

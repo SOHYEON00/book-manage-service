@@ -1,13 +1,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import BookListItem from './BookListItem';
+import Table from 'react-bootstrap/Table';
 
+const tableStyle = {
+    backgroundColor: '#fff',
+};
+const theadStyle = {
+    backgroundColor: '#cbcbcc17',
+};
 
 const BookList = () => {
     const list = useSelector(state => state.bookReducer.books);
     return (<section>
-        <table>
-            <thead>
+        <Table hover bordered style={tableStyle}>
+            <thead style={theadStyle}>
                 <tr>
                     <th>책 제목</th>
                     <th>저자</th>
@@ -31,7 +38,7 @@ const BookList = () => {
                     rentDate={'yyyy-mm-dd'}
                    />)})}
             </tbody>
-        </table>
+        </Table>
       
     </section>)
 };

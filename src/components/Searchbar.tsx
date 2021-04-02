@@ -1,4 +1,17 @@
 import React, { useState } from 'react';
+import { Button, FormControl, Form } from 'react-bootstrap';
+
+const formStyle = {
+    width: '20%',
+    justifyContent: 'space-between',
+};
+const inputTextStyle = {
+    width: '80%',
+};
+const btnStyle = {
+    backgroundColor: '#fff',
+    borderColor: '#ced4da',
+};
 
 const Searchbar = () => {
     const [text, setText] = useState<string>('');
@@ -18,10 +31,11 @@ const Searchbar = () => {
     }
 
     return(
-        <form onSubmit={onSubmitText}>
-            <input type='text' value={text} onChange={onChangeValue} placeholder='책 제목'/>
-            <input type='submit' value='검색' />
-        </form>
+        
+        <Form inline onSubmit={onSubmitText} style={formStyle}>
+            <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={inputTextStyle}/>
+            <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
+        </Form>
     );
 };
 
