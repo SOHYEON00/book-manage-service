@@ -18,26 +18,14 @@ const titleStyle = {
 
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false); // 로그인 여부 파악
-
   const stateUserObj = useSelector(state => state.userReducer.userObj);
-  console.log(stateUserObj.length);
-  console.log(stateUserObj);
-
-  // useEffect(() => {
-  //   if(stateUserObj !== null) {
-  //     setIsLogin(true);
-  //   } else {
-  //     setIsLogin(false);
-  //   }
-  // }, [stateUserObj]);
-
+  const isLoggin = useSelector(state => state.userReducer.isLoggin);
 
   return (
     <>
       <main style={mainStyle}>
         <p style={titleStyle}>도서 관리 서비스</p>
-        <AppRouter isLogin={isLogin} userObj={stateUserObj}/>
+        <AppRouter isLogin={isLoggin} userObj={stateUserObj}/>
       </main>
     </>
   );

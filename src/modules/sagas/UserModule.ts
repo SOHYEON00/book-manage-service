@@ -163,7 +163,8 @@ type UserActionTypes =
 // reducers
 
 const initialState = {
-    userObj: {}
+    userObj: {},
+    isLoggin: false
 };
 
 
@@ -173,11 +174,12 @@ export const userReducer = (state=initialState, action:UserActionTypes) => {
     switch(action.type) {
         case types.LOGIN_SUCCESS:
             return {
-                userObj: action.payload
+                userObj: action.payload,
+                isLoggin: true
             };
         case types.LOGIN_FAIL:
             return {
-                ...state
+                ...state,
             };
         default: 
             return {

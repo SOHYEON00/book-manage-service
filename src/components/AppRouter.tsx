@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, RouteComponentProps, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Auth from './Auth';
 import Nav from './Nav';
 import BookList from './BookList';
