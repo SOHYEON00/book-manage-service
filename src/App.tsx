@@ -1,9 +1,7 @@
 import {useState, useEffect} from 'react';
-import BookList from './components/BookList';
-import Nav from './components/Nav';
 import * as React from 'react';
-// import * as types from './modules/types';
-import {useDispatch} from 'react-redux';
+import * as types from './modules/types';
+import {useDispatch, useSelector} from 'react-redux';
 import { authService } from 'fBase';
 import AppRouter from 'components/AppRouter';
 
@@ -20,32 +18,26 @@ const titleStyle = {
 
 
 const App = () => {
-  const dispatch = useDispatch();
-  const [userObj, setUserObj] = useState(null);
-  // 유저 로그인 출력 -> router가 하기
-  // 유저 로그인 정보 가져오는 역할 -> app이 하기
-  
+  const [isLogin, setIsLogin] = useState(false); // 로그인 여부 파악
+
+  const stateUserObj = useSelector(state => state.userReducer.userObj);
+  console.log(stateUserObj.length);
+  console.log(stateUserObj);
 
   // useEffect(() => {
-  //   // dispatch({type: types.GET_LIST_DB_REQUEST});
-
-  //   // 사용자의 로그인 상태 관찰자
-  //   authService.onAuthStateChanged((user) => { 
-  //     if(user) {
-  //       console.log(user);
-  //     } else {
-  //       setUserObj(null);
-  //     }
-  //   });
-    
-  // },[dispatch]);
+  //   if(stateUserObj !== null) {
+  //     setIsLogin(true);
+  //   } else {
+  //     setIsLogin(false);
+  //   }
+  // }, [stateUserObj]);
 
 
   return (
     <>
       <main style={mainStyle}>
         <p style={titleStyle}>도서 관리 서비스</p>
-        <AppRouter />
+        <AppRouter isLogin={isLogin} userObj={stateUserObj}/>
       </main>
     </>
   );
