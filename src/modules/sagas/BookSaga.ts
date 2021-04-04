@@ -3,7 +3,6 @@ import * as api from '../api';
 import {call, put} from 'redux-saga/effects';
 
 
-
 export function* getBookListDBSaga() {
     // // api 호출 -> 결과를 리덕스에 데이터 추가
 

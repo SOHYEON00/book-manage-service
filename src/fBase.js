@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 // const firebase = require('firebase');
 // require('firebase/firestore');
@@ -14,6 +15,12 @@ const firebaseConfig = ({
     appId: "1:385551841011:web:4ab782c1fef95095afa986"
 });
 
+// initialize firebase
 export default firebase.initializeApp(firebaseConfig);
 
+// db service
 export const dbService = firebase.firestore();
+
+// auth service (google provider)
+export const authInstance = firebase;
+export const authService = firebase.auth();
