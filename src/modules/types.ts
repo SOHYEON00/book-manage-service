@@ -13,3 +13,12 @@ export const GET_LIST_DB_FAIL = 'book/GET_LIST_DB_FAIL' as const; // 실패
 export const LOGIN_REQUEST = 'user/LOGIN_REQUEST' as const;
 export const LOGIN_SUCCESS = 'user/LOGIN_SUCCESS' as const; 
 export const LOGIN_FAIL = 'user/LOGIN_FAIL' as const;
+
+// set search text into store
+export const SET_TEXT_REQUEST = 'book/SET_TEXT_REQUEST' as const;
+export const SET_TEXT_SUCCESS = 'book/SET_TEXT_SUCCESS' as const;
+export const SET_TEXT_FAIL = 'book/SET_TEXT_FAIL' as const;
+
+export const SEARCH_API_REQUEST = 'book/SEARCH_API_REQUEST';
+export const SEARCH_API_SUCCESS = 'book/SEARCH_API_SUCCESS';
+export const SEARCH_API_FAIL = 'book/SEARCH_API_FAIL';

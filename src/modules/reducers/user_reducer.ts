@@ -7,7 +7,6 @@ export const initialState = {
 };
 
 export const userReducer = (state=initialState, action:UserActionTypes) => {
-    console.log(action.type);
     switch(action.type) {
         case types.LOGIN_SUCCESS:
             return {

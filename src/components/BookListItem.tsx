@@ -15,7 +15,7 @@ const BookListItem = (props: bookListItemType) => {
     const { authors, publisher, title, isEbook, possibleRent } = props;
 
     const rentBookClick = () => {
-        const result = window.confirm(`${title}을 대출하시겠습니까?`);
+        const result = window.confirm(`${title} 을/를 대출하시겠습니까?`);
 
         if(result) { // 대출 선택
             // 대출한다

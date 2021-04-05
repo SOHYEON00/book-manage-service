@@ -1,6 +1,5 @@
 import axios from "axios";
 import { authInstance, authService, dbService } from "fBase";
-import firebase from 'firebase/app';
 
 
 export const getBooks = async() => {

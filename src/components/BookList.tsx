@@ -11,13 +11,18 @@ const theadStyle = {
     backgroundColor: '#cbcbcc17',
 };
 
-const BookList = () => {
-    const dispatch = useDispatch();
-    const list = useSelector(state => state.bookReducer.books, shallowEqual);
-    console.log(list);
+interface Prop {
+    list: any
+}
+const BookList = (props:Prop) => {
+    const {list} = props;
+    const text = useSelector(state => state.searchReducer.text);
+    const [bookList, setBookList] = useState(list);
+
     useEffect(() => {
-        dispatch({type: types.GET_LIST_DB_REQUEST});
-    }, []);
+        const filtered = list.filter((listItem:any) => listItem.title.includes(text));
+        setBookList(filtered);
+    }, [text, list]); 
 
     return (
         <section>
@@ -32,7 +37,8 @@ const BookList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {list.map((item:any) => { 
+                    
+                {bookList.map((item:any) => { 
                     return (
                         <BookListItem 
                             key={item.id}

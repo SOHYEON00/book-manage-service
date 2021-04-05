@@ -29,8 +29,9 @@ export const initialState = {
             case types.GET_LIST_DB_FAIL:
                 return {
                     ...state
-                }
+                };
             default:
                 return state;
         }
+        
     }
