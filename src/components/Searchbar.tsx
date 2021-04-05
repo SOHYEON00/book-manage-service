@@ -1,5 +1,7 @@
+import { SET_TEXT_REQUEST } from 'modules/types';
 import React, { useState } from 'react';
 import { Button, FormControl, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
 const formStyle = {
     width: '20%',
@@ -15,6 +17,7 @@ const btnStyle = {
 
 const Searchbar = () => {
     const [text, setText] = useState<string>('');
+    const dispatch = useDispatch();
 
     // text onChange Handler
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +29,8 @@ const Searchbar = () => {
     const onSubmitText = (event:React.FormEvent)=> {
         event.preventDefault();
         console.log(text);
-        // api 검색
+        dispatch({type: SET_TEXT_REQUEST, payload: text})
+        // api 검색 - dispatch({ type: 검색, payload: text})
         // db 검색
     }
 

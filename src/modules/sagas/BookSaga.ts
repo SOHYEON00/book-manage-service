@@ -1,6 +1,6 @@
 import * as types from '../types';
 import * as api from '../api';
-import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {call, put, takeLatest} from 'redux-saga/effects';
 
 
 function* getBookListDBSaga() {
@@ -21,5 +21,6 @@ function* getBookListDBSaga() {
 
 export default function* watchBookSaga() {
     yield takeLatest(types.GET_LIST_DB_REQUEST, getBookListDBSaga);
+    // yield takeEvery(types.SET_TEXT_REQUEST, )
     
-}
+};

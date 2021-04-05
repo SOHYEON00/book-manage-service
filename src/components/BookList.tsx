@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import BookListItem from './BookListItem';
 import Table from 'react-bootstrap/Table';
 import * as types from 'modules/types';
@@ -11,16 +11,20 @@ const theadStyle = {
     backgroundColor: '#cbcbcc17',
 };
 
-const BookList = () => {
-    const dispatch = useDispatch();
-    const list = useSelector(state => state.bookReducer.books);
+interface Prop {
+    list: any
+}
+const BookList = (props:Prop) => {
+    const {list} = props;
+    const text = useSelector(state => state.searchReducer.text);
+    const [bookList, setBookList] = useState(list);
 
     useEffect(() => {
-        dispatch({type: types.GET_LIST_DB_REQUEST});
-    }, []);
+        const filtered = list.filter((listItem:any) => listItem.title.includes(text));
+        setBookList(filtered);
+    }, [text, list]); 
 
     return (
-   
         <section>
             <Table hover bordered style={tableStyle}>
                 <thead style={theadStyle}>
@@ -29,22 +33,23 @@ const BookList = () => {
                         <th>저자</th>
                         <th>출판사</th>
                         <th>책 형태</th>
-                        <th>대출 상태</th>
-                        <th>대출 날짜</th>
+                        <th>대출 정보</th>
                     </tr>
                 </thead>
                 <tbody>
-                {list.map((item:any) => { 
-                    return (<BookListItem 
-                        key={item.id}
-                        authors={item.authors}
-                        isbn={item.isbn}
-                        publisher={item.publisher}
-                        title={item.title}
-                        isEbook={false}
-                        possibleRent ={true}
-                        rentDate={'yyyy-mm-dd'}
-                    />)})}
+                    
+                {bookList.map((item:any) => { 
+                    return (
+                        <BookListItem 
+                            key={item.id}
+                            authors={item.authors}
+                            isbn={item.isbn}
+                            publisher={item.publisher}
+                            title={item.title}
+                            isEbook={false}
+                            possibleRent ={true}
+                        />
+                    )})}
                 </tbody>  
             </Table>
         </section>
