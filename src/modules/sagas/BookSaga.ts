@@ -1,9 +1,9 @@
 import * as types from '../types';
 import * as api from '../api';
-import {call, put} from 'redux-saga/effects';
+import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 
 
-export function* getBookListDBSaga() {
+function* getBookListDBSaga() {
     // // api 호출 -> 결과를 리덕스에 데이터 추가
 
     try {
@@ -17,4 +17,9 @@ export function* getBookListDBSaga() {
     } catch (error) {
         yield put({ type: types.GET_LIST_DB_FAIL, payload: '실패함'});
     }
+};
+
+export default function* watchBookSaga() {
+    yield takeLatest(types.GET_LIST_DB_REQUEST, getBookListDBSaga);
+    
 }

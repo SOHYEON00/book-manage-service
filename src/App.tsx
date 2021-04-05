@@ -18,8 +18,8 @@ const titleStyle = {
 
 
 const App = () => {
-  const stateUserObj = useSelector(state => state.userReducer.userObj);
-  const isLoggin = useSelector(state => state.userReducer.isLoggin);
+  const stateUserObj = useSelector(state => state.userReducer.userObj); // 유저객체
+  const isLoggin = useSelector(state => state.userReducer.isLoggin); // 로그인여부
 
   return (
     <>

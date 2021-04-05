@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {bookReducer} from './book_reducer';
-import {userReducer} from '../sagas/UserModule';
+import {userReducer} from './user_reducer';
 
 export const rootReducer = combineReducers({
     bookReducer,
