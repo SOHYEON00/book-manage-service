@@ -11,7 +11,7 @@ const MainComponent = () => {
     
     useEffect(() => {
         dispatch({type: types.GET_LIST_DB_REQUEST}); // 전체 도서리스트 Get요청
-    },[]);
+    },[dispatch]);
 
     return(
         <>

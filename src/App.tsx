@@ -2,8 +2,6 @@
 import * as React from 'react';
 import {shallowEqual, useSelector} from 'react-redux';
 import AppRouter from 'components/AppRouter';
-import axios from 'axios';
-import {dbService} from 'fBase';
 
 
 const mainStyle = {

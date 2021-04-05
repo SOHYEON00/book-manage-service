@@ -1,15 +1,15 @@
 import { BookActionsTypes} from '../actions/book_action';
 import * as types from '../types';
 
-interface stateBookType {
-    authors: [],
-    title: string,
-    publisher: string,
-    id: string,
-    isEbook: boolean,
-    isRent: boolean,
-    borrower: string
-};
+// interface stateBookType {
+//     authors: [],
+//     title: string,
+//     publisher: string,
+//     id: string,
+//     isEbook: boolean,
+//     isRent: boolean,
+//     borrower: string
+// };
 
 export const initialState = {
     books: []

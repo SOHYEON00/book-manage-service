@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import BookListItem from './BookListItem';
 import Table from 'react-bootstrap/Table';
-import * as types from 'modules/types';
 
 const tableStyle = {
     backgroundColor: '#fff',
