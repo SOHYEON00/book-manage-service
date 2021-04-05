@@ -18,7 +18,7 @@ export interface userObjType {
     name: string,
     email: string,
     uid: string,
-    isNewUser: boolean
+    isLoggin: false
 };
 
 

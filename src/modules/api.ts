@@ -1,12 +1,17 @@
 import axios from "axios";
 import { authInstance, authService, dbService } from "fBase";
-
+import firebase from 'firebase/app';
 
 
 export const getBooks = async() => {
     return ((await dbService.collection('books').get()).docs).map(doc => ({
         id: doc.id,
-        ...doc.data()
+        authors: doc.data().authors,
+        title: doc.data().title,
+        publisher: doc.data().publisher,
+        isEbook: false,
+        isRent: false,
+        borrower: doc.data().borrwer
     }));;
 };
 
@@ -20,7 +25,7 @@ export const googleLogin = async() => {
             name: userResponse.user.displayName,
             uid: userResponse.user.uid,
             email: userResponse.user.email,
-            isNewUser: userResponse.additionalUserInfo.isNewUser
+            isLoggin: true
         };
         return userObj;
     } 
@@ -29,6 +34,9 @@ export const googleLogin = async() => {
     }
     
 }
+    
+
+
 
 
 export const getBookListKakao = async() => {

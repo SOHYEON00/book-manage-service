@@ -3,20 +3,19 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Auth from './Auth';
 import Nav from './Nav';
 import BookList from './BookList';
+import { userObjType } from 'modules/actions/user_action';
 
 interface Props {
-    isLogin: boolean,
-    userObj: object
+    userObj: userObjType
 };
 
 const AppRouter = (props:Props) => {
-    const {isLogin, userObj} = props;
-    console.log(userObj);
+    const {userObj} = props;
 
     return (
         <BrowserRouter>
             <Switch>
-                {isLogin ? 
+                {userObj.isLoggin ? 
                     <Route exact path='/'>
                         <Nav />
                         <BookList />
