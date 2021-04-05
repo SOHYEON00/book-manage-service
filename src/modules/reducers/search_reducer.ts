@@ -6,7 +6,7 @@ export const initialState = {
 };
 
 export const searchReducer = (state=initialState, action:SearchActionTypes) => {
-    console.log(action);
+
     switch(action.type){
         case types.SET_TEXT_REQUEST: 
             return {
@@ -17,6 +17,7 @@ export const searchReducer = (state=initialState, action:SearchActionTypes) => {
             return {
                 ...state
             };
+
         default: return { ...state };
     }
 }

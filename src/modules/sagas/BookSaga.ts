@@ -20,7 +20,6 @@ function* getBookListDBSaga() {
 };
 
 export default function* watchBookSaga() {
-    yield takeLatest(types.GET_LIST_DB_REQUEST, getBookListDBSaga);
-    // yield takeEvery(types.SET_TEXT_REQUEST, )
-    
+    // action 발생 시, saga 실행
+    yield takeLatest(types.GET_LIST_DB_REQUEST, getBookListDBSaga);   
 };

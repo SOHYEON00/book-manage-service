@@ -15,7 +15,8 @@ export interface SetTextFailActionType {
 };
 
 export interface SearchApiActionType {
-    type: typeof types.SEARCH_API_REQUEST
+    type: typeof types.SEARCH_API_REQUEST,
+    payload: string
 };
 
 export interface SearchApiSuccessActionType {
@@ -37,8 +38,9 @@ export const setTextFailAction = (payload:string):SetTextFailActionType => ({
     payload: payload
 });
 
-export const searchApiAction = ():SearchApiActionType => ({
-    type: types.SEARCH_API_REQUEST
+export const searchApiAction = (text:string):SearchApiActionType => ({
+    type: types.SEARCH_API_REQUEST,
+    payload: text
 });
 
 export const searchApiSuccessAction = (text:string):SearchApiSuccessActionType => ({

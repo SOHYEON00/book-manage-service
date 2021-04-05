@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useSelector } from 'react-redux';
 import BookListItem from './BookListItem';
 import Table from 'react-bootstrap/Table';
+import axios from 'axios';
 
 const tableStyle = {
     backgroundColor: '#fff',
@@ -17,11 +18,33 @@ const BookList = (props:Prop) => {
     const {list} = props;
     const text = useSelector(state => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
+    const [apiBookList, setApiBookList] = useState([]);
+
+    // 카카오 오픈 api 요청
+    const getBookList = async(text:string) => {
+        await axios.get('https://dapi.kakao.com/v3/search/book', {
+        params: {
+            size: 5,
+            page: 1,
+            target: 'title', 
+            query: text
+        },
+        headers: {
+            Authorization: 'KakaoAK 944c0144b818850f00f4dc844d53751b',
+        }
+        })
+        .then((res) => {
+            setApiBookList(res.data.documents);
+        }).catch( (error) => {console.log(error.message);});
+    }; 
+
 
     useEffect(() => {
         if(text !== ''){ // 검색어 있는 경우
             const filtered = list.filter((listItem:any) => listItem.title.includes(text));
             setBookList(filtered); 
+            getBookList(text); // 오픈 api 요청
+            console.log(text);
         } else { // 검색어 없는 경우
             setBookList(list);
         }
@@ -55,6 +78,7 @@ const BookList = (props:Prop) => {
                     )})}
                 </tbody>  
             </Table>
+            { text && (JSON.stringify(apiBookList))}
         </section>
     );
 };
