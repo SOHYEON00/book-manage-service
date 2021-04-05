@@ -23,13 +23,14 @@ const Searchbar = () => {
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setText(value);
+        dispatch({type: SET_TEXT_REQUEST, payload: value});
     } 
     
     // 검색 기능 submit handler
     const onSubmitText = (event:React.FormEvent)=> {
         event.preventDefault();
         console.log(text);
-        dispatch({type: SET_TEXT_REQUEST, payload: text})
+        dispatch({type: SET_TEXT_REQUEST, payload: text});
         // api 검색 - dispatch({ type: 검색, payload: text})
         // db 검색
     }

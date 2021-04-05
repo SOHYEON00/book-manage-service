@@ -20,8 +20,12 @@ const BookList = (props:Prop) => {
     const [bookList, setBookList] = useState(list);
 
     useEffect(() => {
-        const filtered = list.filter((listItem:any) => listItem.title.includes(text));
-        setBookList(filtered);
+        if(text !== ''){ // 검색어 있는 경우
+            const filtered = list.filter((listItem:any) => listItem.title.includes(text));
+            setBookList(filtered); 
+        } else { // 검색어 없는 경우
+            setBookList(list);
+        }
     }, [text, list]); 
 
     return (
