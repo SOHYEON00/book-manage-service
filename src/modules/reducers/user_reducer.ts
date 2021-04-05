@@ -1,9 +1,10 @@
 import {UserActionTypes} from '../actions/user_action';
 import * as types from '../types';
 
-const initialState = {
+export const initialState = {
     userObj: {},
-    isLoggin: false
+    isLoggin: false,
+    error: ''
 };
 
 export const userReducer = (state=initialState, action:UserActionTypes) => {
@@ -18,6 +19,7 @@ export const userReducer = (state=initialState, action:UserActionTypes) => {
         case types.LOGIN_FAIL:
             return {
                 ...state,
+                error: action.payload
             };
         default: 
             return {

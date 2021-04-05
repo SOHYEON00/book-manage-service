@@ -1,8 +1,6 @@
-import {useState, useEffect} from 'react';
+
 import * as React from 'react';
-import * as types from './modules/types';
-import {useDispatch, useSelector} from 'react-redux';
-import { authService } from 'fBase';
+import {shallowEqual, useSelector} from 'react-redux';
 import AppRouter from 'components/AppRouter';
 
 
@@ -18,14 +16,20 @@ const titleStyle = {
 
 
 const App = () => {
-  const stateUserObj = useSelector(state => state.userReducer.userObj); // 유저객체
-  const isLoggin = useSelector(state => state.userReducer.isLoggin); // 로그인여부
+  const {isLoggin, userObj, error} = useSelector((state) => ({
+    isLoggin: state.userReducer.isLoggin,
+    userObj: state.userReducer.userObj,
+    error: state.userReducer.error
+  }), shallowEqual); // 컴포넌트 렌더링 최적화
 
   return (
     <>
       <main style={mainStyle}>
         <p style={titleStyle}>도서 관리 서비스</p>
-        <AppRouter isLogin={isLoggin} userObj={stateUserObj}/>
+        {error 
+          ? <div>{error.message}</div> // 에러 메시지 표시
+          : <AppRouter isLogin={isLoggin} userObj={userObj}/>
+        }
       </main>
     </>
   );

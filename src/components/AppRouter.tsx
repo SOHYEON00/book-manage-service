@@ -11,6 +11,7 @@ interface Props {
 
 const AppRouter = (props:Props) => {
     const {isLogin, userObj} = props;
+    console.log(userObj);
 
     return (
         <BrowserRouter>

@@ -32,7 +32,7 @@ export const loginSuccessAction = (userObj:userObjType):LoginSuccessActionType =
 });
 export const loginFailAction = (payload:any):LoginFailActionType => ({
     type: types.LOGIN_FAIL,
-    payload: payload
+    payload: payload.message
 });
 
 export type UserActionTypes = 
