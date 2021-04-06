@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Auth from './Auth';
-import { userObjType } from 'modules/actions/user_action';
+import { userObjType } from 'propsTypes';
 import MainComponent from './MainComponent';
 
 interface Props {
