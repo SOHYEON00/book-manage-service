@@ -1,16 +1,18 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
-import {bookListItemType} from 'propsTypes';
 
-interface Props {
-    bookItem: bookListItemType
-}
+export interface dbBookItemType {
+    authors: Array<string>,
+    isbn: string,
+    publisher: string,
+    title: string,
+    isEbook: boolean,
+    possibleRent: boolean,
+};
 
-
-const BookListItem = (props: Props) => {
+const BookListItem = (props: dbBookItemType) => {
     // title, authors, publisher, isEbook, isRent, rentDate, checkRent
-    const { authors, publisher, title, isEbook, isRent } = props.bookItem;
-    console.log(props.bookItem);
+    const { authors, publisher, title, isEbook, possibleRent } = props;
 
     const rentBookClick = () => {
         const result = window.confirm(`${title} 을/를 대출하시겠습니까?`);
@@ -31,7 +33,7 @@ const BookListItem = (props: Props) => {
             <td>{authors}</td>
             <td>{publisher}</td>           
             <td>{isEbook ? 'Ebook' : '출판도서'}</td>
-            <td>{!isRent 
+            <td>{possibleRent 
                 ? <Button onClick={rentBookClick}>대출가능</Button> 
                 : '대출불가'}</td>
             

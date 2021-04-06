@@ -1,5 +1,4 @@
 import * as types from '../types';
-import {userObjType} from 'propsTypes';
 
 interface LoginActionType {
     type: typeof types.LOGIN_REQUEST,
@@ -13,6 +12,13 @@ interface LoginSuccessActionType {
 interface LoginFailActionType {
     type: typeof types.LOGIN_FAIL,
     payload: string
+};
+
+export interface userObjType {
+    name: string,
+    email: string,
+    uid: string,
+    isLoggin: false
 };
 
 

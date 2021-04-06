@@ -2,8 +2,19 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import ApiBookListItem from 'components/ApiBookListItem';
 import {tableStyle, theadStyle} from 'styleComponent';
-import {apiBookItemType} from 'propsTypes';
 
+export interface apiBookItemType {
+    thumbnail: string,
+    title: string,
+    authors: Array<string>,
+    publisher: string,
+    isEbook: boolean,
+    status: string,
+    price: number,
+    salePrice: number,
+    isbn: string,
+    url: string
+};
 
 interface Prop {
     apiBookList: Array<apiBookItemType>

@@ -3,7 +3,7 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 import * as types from '../types';
 import * as apis from '../api';
-import {userObjType} from 'propsTypes';
+import {userObjType} from '../actions/user_action';
 
 function* loginUserSaga() {
     try {

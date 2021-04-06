@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {useSelector } from 'react-redux';
 import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
-import ApiBookList from 'components/ApiBookList';
+import ApiBookList, {apiBookItemType} from 'components/ApiBookList';
 import axios from 'axios';
 import {tableStyle, theadStyle} from 'styleComponent';
-import {bookListItemType, apiBookItemType} from 'propsTypes';
 
 interface Prop {
-    list: Array<bookListItemType>
-};
-
+    list: any
+}
 const BookList = (props:Prop) => {
     const {list} = props;
     const text = useSelector(state => state.searchReducer.text);
@@ -65,12 +63,16 @@ const BookList = (props:Prop) => {
                 </thead>
                 <tbody>
                     
-                {bookList.map((item:bookListItemType) => { 
-                    item.isRent = false; // 대출/반납 기능 구현 시, 여기서 값 변경
+                {bookList.map((item:any) => { 
                     return (
                         <BookListItem 
-                            key={`${item.title}/${item.isbn}`}
-                            bookItem={item}
+                            key={item.id}
+                            authors={item.authors}
+                            isbn={item.isbn}
+                            publisher={item.publisher}
+                            title={item.title}
+                            isEbook={false}
+                            possibleRent ={true}
                         />
                     )})}
                 </tbody>  
