@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 
-export interface bookListItemType {
+export interface dbBookItemType {
     authors: Array<string>,
     isbn: string,
     publisher: string,
@@ -10,7 +10,7 @@ export interface bookListItemType {
     possibleRent: boolean,
 };
 
-const BookListItem = (props: bookListItemType) => {
+const BookListItem = (props: dbBookItemType) => {
     // title, authors, publisher, isEbook, isRent, rentDate, checkRent
     const { authors, publisher, title, isEbook, possibleRent } = props;
 

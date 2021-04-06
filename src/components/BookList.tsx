@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector } from 'react-redux';
-import BookListItem from './BookListItem';
+import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
+import ApiBookList, {apiBookItemType} from 'components/ApiBookList';
 import axios from 'axios';
 
 const tableStyle = {
@@ -18,7 +19,7 @@ const BookList = (props:Prop) => {
     const {list} = props;
     const text = useSelector(state => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
-    const [apiBookList, setApiBookList] = useState([]);
+    const [apiBookList, setApiBookList] = useState<Array<apiBookItemType>>([]);
 
     // 카카오 오픈 api 요청
     const getBookList = async(text:string) => {
@@ -40,25 +41,28 @@ const BookList = (props:Prop) => {
 
 
     useEffect(() => {
+        let filtered;
         if(text !== ''){ // 검색어 있는 경우
-            const filtered = list.filter((listItem:any) => listItem.title.includes(text));
-            setBookList(filtered); 
-            getBookList(text); // 오픈 api 요청
-            console.log(text);
+            filtered = list.filter((listItem:any) => listItem.title.includes(text));
+            setTimeout(() => {getBookList(text)}, 1000);
+
         } else { // 검색어 없는 경우
-            setBookList(list);
+            filtered = list;
         }
+
+        setBookList(filtered); 
     }, [text, list]); 
 
     return (
+        <>
         <section>
             <Table hover bordered style={tableStyle}>
                 <thead style={theadStyle}>
                     <tr>
-                        <th>책 제목</th>
+                        <th>도서 제목</th>
                         <th>저자</th>
                         <th>출판사</th>
-                        <th>책 형태</th>
+                        <th>도서 형태</th>
                         <th>대출 정보</th>
                     </tr>
                 </thead>
@@ -78,8 +82,10 @@ const BookList = (props:Prop) => {
                     )})}
                 </tbody>  
             </Table>
-            { text && (JSON.stringify(apiBookList))}
         </section>
+        <hr />
+        <ApiBookList apiBookList={apiBookList}/>
+        </>
     );
 };
 
