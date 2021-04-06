@@ -3,19 +3,8 @@ import React, { useState } from 'react';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
+import {searchFormStyle, searchInputTextStyle, btnStyle} from 'styleComponent';
 
-
-const formStyle = {
-    width: '20%',
-    justifyContent: 'space-between',
-};
-const inputTextStyle = {
-    width: '80%',
-};
-const btnStyle = {
-    backgroundColor: '#fff',
-    borderColor: '#ced4da',
-};
 
 const Searchbar = () => {
     const [text, setText] = useState<string>('');
@@ -25,7 +14,7 @@ const Searchbar = () => {
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setText(value);
-        dispatch({type: SET_TEXT_REQUEST, payload: value}); // 실시간 검색 기능위해 바로 action dispatch
+        dispatch({type: SET_TEXT_REQUEST, payload: value}); // 실시간 검색 기능, 바로 action dispatch
     } 
     
     // 검색 기능 submit handler
@@ -37,8 +26,8 @@ const Searchbar = () => {
 
     return(
         
-        <Form inline onSubmit={onSubmitText} style={formStyle}>
-            <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={inputTextStyle}/>
+        <Form inline onSubmit={onSubmitText} style={searchFormStyle}>
+            <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={searchInputTextStyle}/>
             <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
         </Form>
     );

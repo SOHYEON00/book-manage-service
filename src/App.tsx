@@ -2,17 +2,9 @@
 import * as React from 'react';
 import {shallowEqual, useSelector} from 'react-redux';
 import AppRouter from 'components/AppRouter';
+import {mainStyle, titleStyle} from 'styleComponent';
 
 
-const mainStyle = {
-  padding: '6rem 3rem',
-  backgroundColor: '#f0f2f5',
-};
-
-const titleStyle = {
-  fontSize: '1.4rem',
-  color: '#4b5258'
-};
 //  // DB 도서 추가
 //  const addBook = (bookInfoList:Array<any>) => {
 //   bookInfoList.forEach((bookInfo) => {

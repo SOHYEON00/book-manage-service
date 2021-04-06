@@ -2,12 +2,8 @@ import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import AddBookButton from './AddBookButton';
 import Searchbar from './Searchbar';
+import {navStyle} from 'styleComponent';
 
-const navStyle = {
-    padding: 0,
-    marginTop: '3rem',
-    marginBottom: '1rem'
-};
 
 
 const Nav = () => {

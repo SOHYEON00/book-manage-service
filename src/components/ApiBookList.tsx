@@ -1,13 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import ApiBookListItem from 'components/ApiBookListItem';
-
-const tableStyle = {
-    backgroundColor: '#fff',
-};
-const theadStyle = {
-    backgroundColor: '#cbcbcc17',
-};
+import {tableStyle, theadStyle} from 'styleComponent';
 
 export interface apiBookItemType {
     thumbnail: string,

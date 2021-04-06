@@ -4,13 +4,7 @@ import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
 import ApiBookList, {apiBookItemType} from 'components/ApiBookList';
 import axios from 'axios';
-
-const tableStyle = {
-    backgroundColor: '#fff',
-};
-const theadStyle = {
-    backgroundColor: '#cbcbcc17',
-};
+import {tableStyle, theadStyle} from 'styleComponent';
 
 interface Prop {
     list: any

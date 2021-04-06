@@ -1,10 +1,6 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
-
-const btnStyle = {
-    backgroundColor: "#fff",
-    borderColor: "#ced4da",
-};
+import {btnStyle} from 'styleComponent';
 
 const AddBookButton = () => {
 
