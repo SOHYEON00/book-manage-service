@@ -28,7 +28,8 @@ const BookList = (props:Prop) => {
             size: 5,
             page: 1,
             target: 'title', 
-            query: text
+            query: text,
+            sort: 'recency'
         },
         headers: {
             Authorization: 'KakaoAK 944c0144b818850f00f4dc844d53751b',

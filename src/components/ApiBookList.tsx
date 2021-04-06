@@ -18,7 +18,8 @@ export interface apiBookItemType {
     status: string,
     price: number,
     salePrice: number,
-    isbn: string
+    isbn: string,
+    url: string
 };
 
 interface Prop {
