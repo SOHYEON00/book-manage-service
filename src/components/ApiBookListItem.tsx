@@ -1,5 +1,5 @@
 import React from 'react';
-import {apiBookItemType} from 'components/ApiBookList';
+import {apiBookItemType} from 'propsTypes';
 
 interface Props {
     book: apiBookItemType
