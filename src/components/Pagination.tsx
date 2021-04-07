@@ -1,4 +1,3 @@
-import { first } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 
@@ -17,24 +16,22 @@ interface pageBoxType {
 const PaginationComponent = (prop:Props) => {
     const {endPage, currentPage, onClickEvent} = prop; // end page number
     const [pageBoxList, setPageBoxList] = useState<Array<pageBoxType>>([]);
-    const firstPage = 1;
+    const firstPage = 1; // 첫번째 페이지
 
-     // from부터 to까지의 수 만큼 연속된 페이지박스 생성
+     // 현제 페이지 위치와 앞,뒤 2개의 페이지 출력 ex) ...4,5,6,7,8...
     const continueMiddlePageBox = (current:number, array:Array<pageBoxType>) => {
-        let tempList:Array<pageBoxType> = [];
-
         for(let i=current-2; i<=current+2; i++) {
-            tempList.push({ pageNum: i, type: 'page'});
+            array.push({ pageNum: i, type: 'page'});
         }
-        tempList.forEach((value:pageBoxType)=> array.push(value));
         return array; // 리턴: 배열값
     };
 
+    // 현재 페이지위치가 맨 끝(처음, 마지막) 포함 2개일 때 (1,2,3 or 마지막페이지-2 ~ 마지막페이지)
     const continueEndPageBox = (page1:number, page2:number, array:Array<pageBoxType>) => {
-        let tempList:Array<pageBoxType> = [];
         let from;
         let to;
 
+        // for문 시작, 마지막 지점 정하기 위한 조건문
         if(page1 <= page2) {
             from = page1;
             to = page2;
@@ -44,9 +41,8 @@ const PaginationComponent = (prop:Props) => {
         }
 
         for(let i=from; i<=to; i++) {
-            tempList.push({ pageNum: i, type: 'page'});
+            array.push({ pageNum: i, type: 'page'});
         }
-        tempList.forEach((value:pageBoxType)=> array.push(value));
         return array; // 리턴: 배열값
     };
 
@@ -55,14 +51,14 @@ const PaginationComponent = (prop:Props) => {
     const makePageBoxList = (firstPage:number, currentPage:number, endPage:number) => {
         let tempList:Array<pageBoxType> = [];
 
-        // 1 ~ 5 사이 
+        // 현재 페이지 위치:1 ~ 3  
         if(currentPage <= firstPage + 2)  {
             continueEndPageBox(firstPage, firstPage+3, tempList);
             tempList.push({ pageNum: 0, type: 'next'});
             tempList.push({ pageNum: endPage, type: 'page'});
         } 
         
-        // endPage - 5 ~ endPage 사이
+        // 현재 페이지 위치: 마지막 3개 (endPage-2 ~ endPage)
         else if(currentPage >= endPage - 2) {
             tempList.push({ pageNum: firstPage, type: 'page'});
             tempList.push({ pageNum: 0, type: 'prev'});
@@ -87,7 +83,7 @@ const PaginationComponent = (prop:Props) => {
         } 
 
         // 페이지네이션 출력
-        if(endPage === firstPage ) {
+        if(endPage === firstPage ) { // 1페이지만 있는 경우
             const arr = continueEndPageBox(currentPage, endPage, []);
             setPageBoxList(arr);
         }
