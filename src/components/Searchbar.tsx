@@ -14,11 +14,11 @@ const Searchbar = () => {
     // text onChange Handler
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        // console.log(value);
         setText(value);
         onDebounceChangeValue(value);
     };
 
+    // text 상태 설정에 debounce 
     const onDebounceChangeValue = useCallback(
         _.debounce((value: string) => {
             dispatch({type: types.SET_TEXT_REQUEST, payload: value});
