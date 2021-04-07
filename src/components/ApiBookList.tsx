@@ -17,6 +17,7 @@ const ApiBookList = () => {
 
     // 카카오 api 요청 -> api로 받은 도서 리스트, 마지막 페이지 set
     const requestApiBookList = () => {
+
         const apiResponse = getApiBookList(text, currentPage); // promise 반환
         apiResponse
             .then((result) => { // { documents: 도서리스트, meta }
@@ -24,12 +25,14 @@ const ApiBookList = () => {
                 setEndPage(calEndPage(result.meta.pageable_count));
             })
             .catch((err) => console.log(err));
+       
     };
 
     // 마지막 페이지 계산
     const calEndPage = (posts:number) => {
         const postPerPage = 5;
-        return Math.ceil(posts / postPerPage) ;
+        // 요청 시, page는 1~100까지의 정수이므로 100이 넘는지 검사
+        return Math.ceil(posts / postPerPage) > 100 ? 100 : Math.ceil(posts / postPerPage);
     };
 
     useEffect(() => {

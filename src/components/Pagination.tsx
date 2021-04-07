@@ -80,6 +80,7 @@ const PaginationComponent = (prop:Props) => {
         // 잘못된 값이 입력된 경우.
         if(endPage < currentPage) {
             console.log('Error: endPage는 currentPage보다 작을 수 없습니다.');
+            
         } 
 
         // 페이지네이션 출력
