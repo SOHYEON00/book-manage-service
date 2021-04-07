@@ -33,9 +33,12 @@ const ApiBookList = () => {
     };
 
     useEffect(() => {
-        // text 값이 있는 경우만 api 요청
+        // 검색어 값이 있는 경우만 api 요청
         if(text !== '') {
             requestApiBookList();
+        } else { // 검색어 값이 없는 경우, 초기화
+            setApiBookList([]);
+            setEndPage(1);
         }
     }, [text, currentPage]);
 

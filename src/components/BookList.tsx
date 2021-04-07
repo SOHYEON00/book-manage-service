@@ -1,31 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import {useSelector } from 'react-redux';
+import {useSelector, useDispatch } from 'react-redux';
 import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
 import ApiBookList from 'components/ApiBookList';
 import {tableStyle, theadStyle} from 'styleComponent';
 import {bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
+import * as types from 'modules/types';
+import PaginationComponent from './Pagination';
 
-interface Prop {
-list: Array<bookListItemType>
-};
+const BookList = () => {
+    const dispatch = useDispatch();
 
-const BookList = (props:Prop) => {
-    const {list} = props;
     const text = useSelector((state:RootState) => state.searchReducer.text);
+    const list = useSelector((state:RootState) => state.bookReducer.books);
     const [bookList, setBookList] = useState(list);
+    const [endPage, setEndPage] = useState(1); // 마지막 페이지
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
+
+    // 마지막 페이지 계산
+    const calEndPage = (posts:number) => {
+        const postPerPage = 5;
+        return Math.ceil(posts / postPerPage) ;
+    };
+
+    const onClickPageBox = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { id } = e.target;
+        const clickedElem = JSON.parse(id);
+
+        // 클릭된 페이지박스 타입별 동작
+        if(clickedElem.type === 'page') {
+            setCurrentPage(clickedElem.pageNum);
+        } else if(clickedElem.type === 'next') {
+            setCurrentPage(currentPage + 3);
+        } else if(clickedElem.type === 'prev') {
+            setCurrentPage(currentPage - 3);
+        } else { // 예외
+            setCurrentPage(currentPage);
+        }
+        
+    };
 
     useEffect(() => {
-        let filtered;
+        dispatch({type: types.GET_LIST_DB_REQUEST}); // 전체 도서리스트 Get요청;
+        // dispatch({type: types.GET_LIST_DB_REQUEST}); // 전체 도서리스트 Get요청;
+        let filtered; 
 
         if(text !== ''){ // 검색어 있는 경우
             filtered = list.filter((listItem:any) => listItem.title.includes(text));
-            // console.log(text);
         } else { // 검색어 없는 경우
             filtered = list;
         }
-
         setBookList(filtered); 
     }, [text, list]); 
 
@@ -54,6 +79,7 @@ const BookList = (props:Prop) => {
                     )})}
                 </tbody>  
             </Table>
+            <PaginationComponent endPage={endPage} currentPage={currentPage} onClickEvent={onClickPageBox}/>
         </section>
         <hr />
         <ApiBookList />
