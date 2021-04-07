@@ -87,7 +87,7 @@ const PaginationComponent = (prop:Props) => {
         } 
 
         // 페이지네이션 출력
-        if(endPage === 1 ) {
+        if(endPage === firstPage ) {
             const arr = continueEndPageBox(currentPage, endPage, []);
             setPageBoxList(arr);
         }
