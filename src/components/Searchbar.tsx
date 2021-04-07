@@ -1,4 +1,3 @@
-import { SET_TEXT_REQUEST } from 'modules/types';
 import React, { useCallback, useState } from 'react';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';

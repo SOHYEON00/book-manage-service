@@ -6,24 +6,55 @@ import {tableStyle, theadStyle} from 'styleComponent';
 import {apiBookItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
 import {getApiBookList} from 'modules/api';
+import PaginationComponent from './Pagination';
 
 
 const ApiBookList = () => {
     const text = useSelector((state:RootState) => state.searchReducer.text);
     const [apiBookList, setApiBookList] = useState([]);
+    const [endPage, setEndPage] = useState(1); // 마지막 페이지
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
+
+    // 카카오 api 요청 -> api로 받은 도서 리스트, 마지막 페이지 set
+    const requestApiBookList = () => {
+        const apiResponse = getApiBookList(text, currentPage); // promise 반환
+        apiResponse
+            .then((result) => { // { documents: 도서리스트, meta }
+                setApiBookList(result.documents);
+                setEndPage(calEndPage(result.meta.pageable_count));
+            })
+            .catch((err) => console.log(err));
+    };
+
+    // 마지막 페이지 계산
+    const calEndPage = (posts:number) => {
+        const postPerPage = 5;
+        return Math.ceil(posts / postPerPage) ;
+    };
 
     useEffect(() => {
         // text 값이 있는 경우만 api 요청
         if(text !== '') {
-            const apiResponse = getApiBookList(text); // promise 반환
-            apiResponse
-                .then((result) => { // { documents: 도서리스트, meta }
-                    setApiBookList(result.documents);
-                    // meta: {is_end, pageable_count}
-                })
-                .catch((err) => console.log(err));
+            requestApiBookList();
         }
-    }, [text]);
+    }, [text, currentPage]);
+
+    const onClickPageBox = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { id } = e.target;
+        const clickedElem = JSON.parse(id);
+
+        // 클릭된 페이지박스 타입별 동작
+        if(clickedElem.type === 'page') {
+            setCurrentPage(clickedElem.pageNum);
+        } else if(clickedElem.type === 'next') {
+            setCurrentPage(currentPage + 3);
+        } else if(clickedElem.type === 'prev') {
+            setCurrentPage(currentPage - 3);
+        } else { // 예외
+            setCurrentPage(currentPage);
+        }
+        
+    };
 
     return (
         <section>
@@ -55,6 +86,8 @@ const ApiBookList = () => {
                     })}
                 </tbody>
             </Table>
+            {endPage}
+            <PaginationComponent endPage={endPage} currentPage={currentPage} onClickEvent={onClickPageBox}/>
         </section>
     )
 };
