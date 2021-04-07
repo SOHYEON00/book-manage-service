@@ -54,6 +54,7 @@ const BookList = (props:Prop) => {
                     )})}
                 </tbody>  
             </Table>
+            {/* 페이지네이션 추가 */}
         </section>
         <hr />
         <ApiBookList />
