@@ -10,7 +10,6 @@ interface Props {
 const BookListItem = (props: Props) => {
     // title, authors, publisher, isEbook, isRent, rentDate, checkRent
     const { authors, publisher, title, isEbook, isRent } = props.bookItem;
-    console.log(props.bookItem);
 
     const rentBookClick = () => {
         const result = window.confirm(`${title} 을/를 대출하시겠습니까?`);

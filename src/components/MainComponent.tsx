@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import BookList from './BookList';
 import Nav from './Nav';
 import * as types from 'modules/types';
+import { RootState } from 'modules/reducers';
 
 const MainComponent = () => {
     const dispatch = useDispatch();
-    const list = useSelector(state => state.bookReducer.books);
+    const list = useSelector((state:RootState) => state.bookReducer.books);
     
     
     useEffect(() => {

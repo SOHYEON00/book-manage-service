@@ -32,6 +32,23 @@ export const googleLogin = async() => {
         return 'nothing';
     }
     
-}
+};
     
-
+// 카카오 오픈 api 요청
+export const getApiBookList = async(text:string) => {
+    // api request 결과: 도서 리스트
+    return await axios.get('https://dapi.kakao.com/v3/search/book', {
+    params: {
+        size: 5,
+        page: 1,
+        target: 'title', 
+        query: text,
+        sort: 'recency'
+    },
+    headers: {
+        Authorization: 'KakaoAK 944c0144b818850f00f4dc844d53751b',
+    }
+    })
+    .then((res) => {return res.data})
+    .catch((err) => {return err})
+}; 

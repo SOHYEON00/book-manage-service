@@ -1,8 +1,9 @@
 
 import * as React from 'react';
-import {shallowEqual, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import AppRouter from 'components/AppRouter';
 import {mainStyle, titleStyle} from 'styleComponent';
+import { RootState } from 'modules/reducers';
 
 
 //  // DB 도서 추가
@@ -23,17 +24,14 @@ import {mainStyle, titleStyle} from 'styleComponent';
 
 
 const App = () => {
-  const {userObj, error} = useSelector((state) => ({
-    userObj: state.userReducer.userObj,
-    error: state.userReducer.error
-  }), shallowEqual); // 컴포넌트 렌더링 최적화
+  const {userObj, error} = useSelector((state:RootState) => state.userReducer);
 
   return (
     <>
       <main style={mainStyle}>
         <p style={titleStyle}>도서 관리 서비스</p>
         {error 
-          ? <div>{error.message}</div> // 에러 메시지 표시
+          ? <div>{JSON.stringify(error)}</div> // 에러 메시지 표시
           : <AppRouter userObj={userObj}/>
         }
       </main>

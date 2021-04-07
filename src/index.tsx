@@ -1,4 +1,4 @@
-import { rootReducer } from 'modules/reducers';
+import rootReducer from 'modules/reducers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';

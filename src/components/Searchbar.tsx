@@ -1,9 +1,10 @@
 import { SET_TEXT_REQUEST } from 'modules/types';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
 import {searchFormStyle, searchInputTextStyle, btnStyle} from 'styleComponent';
+import _ from 'lodash';
 
 
 const Searchbar = () => {
@@ -13,9 +14,16 @@ const Searchbar = () => {
     // text onChange Handler
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
+        // console.log(value);
         setText(value);
-        dispatch({type: SET_TEXT_REQUEST, payload: value}); // 실시간 검색 기능, 바로 action dispatch
-    } 
+        onDebounceChangeValue(value);
+    };
+
+    const onDebounceChangeValue = useCallback(
+        _.debounce((value: string) => {
+            dispatch({type: types.SET_TEXT_REQUEST, payload: value});
+    }, 800),[]);
+
     
     // 검색 기능 submit handler
     const onSubmitText = (event:React.FormEvent)=> {

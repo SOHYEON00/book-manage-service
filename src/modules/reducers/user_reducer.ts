@@ -1,9 +1,10 @@
 import {UserActionTypes} from '../actions/user_action';
 import * as types from '../types';
 
-export const initialState = {
+
+const initialState = {
     userObj: {},
-    error: ''
+    essage: ''
 };
 
 export const userReducer = (state=initialState, action:UserActionTypes) => {
@@ -18,8 +19,6 @@ export const userReducer = (state=initialState, action:UserActionTypes) => {
                 error: action.payload
             };
         default: 
-            return {
-                ...state
-            };
+            return state;
     }
 };

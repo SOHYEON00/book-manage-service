@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import ApiBookListItem from 'components/ApiBookListItem';
 import {tableStyle, theadStyle} from 'styleComponent';
 import {apiBookItemType} from 'propsTypes';
+import { RootState } from 'modules/reducers';
+import {getApiBookList} from 'modules/api';
 
 
-interface Prop {
-    apiBookList: Array<apiBookItemType>
-};
+const ApiBookList = () => {
+    const text = useSelector((state:RootState) => state.searchReducer.text);
+    const [apiBookList, setApiBookList] = useState([]);
 
-const ApiBookList = (props:Prop) => {
-    const {apiBookList} = props;
-    console.log(apiBookList);
+    useEffect(() => {
+        // text 값이 있는 경우만 api 요청
+        if(text !== '') {
+            const apiResponse = getApiBookList(text); // promise 반환
+            apiResponse
+                .then((result) => { // { documents: 도서리스트, meta }
+                    setApiBookList(result.documents);
+                    // meta: {is_end, pageable_count}
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [text]);
 
     return (
         <section>

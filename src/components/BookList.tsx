@@ -3,46 +3,25 @@ import {useSelector } from 'react-redux';
 import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
 import ApiBookList from 'components/ApiBookList';
-import axios from 'axios';
 import {tableStyle, theadStyle} from 'styleComponent';
-import {bookListItemType, apiBookItemType} from 'propsTypes';
+import {bookListItemType} from 'propsTypes';
+import { RootState } from 'modules/reducers';
 
 interface Prop {
-    list: Array<bookListItemType>
+list: Array<bookListItemType>
 };
 
 const BookList = (props:Prop) => {
     const {list} = props;
-    const text = useSelector(state => state.searchReducer.text);
+    const text = useSelector((state:RootState) => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
-    const [apiBookList, setApiBookList] = useState<Array<apiBookItemType>>([]);
-
-    // 카카오 오픈 api 요청
-    const getBookList = async(text:string) => {
-        await axios.get('https://dapi.kakao.com/v3/search/book', {
-        params: {
-            size: 5,
-            page: 1,
-            target: 'title', 
-            query: text,
-            sort: 'recency'
-        },
-        headers: {
-            Authorization: 'KakaoAK 944c0144b818850f00f4dc844d53751b',
-        }
-        })
-        .then((res) => {
-            setApiBookList(res.data.documents);
-        }).catch( (error) => {console.log(error.message);});
-    }; 
-
 
     useEffect(() => {
         let filtered;
+
         if(text !== ''){ // 검색어 있는 경우
             filtered = list.filter((listItem:any) => listItem.title.includes(text));
-            setTimeout(() => {getBookList(text)}, 1000);
-
+            // console.log(text);
         } else { // 검색어 없는 경우
             filtered = list;
         }
@@ -77,7 +56,7 @@ const BookList = (props:Prop) => {
             </Table>
         </section>
         <hr />
-        <ApiBookList apiBookList={apiBookList}/>
+        <ApiBookList />
         </>
     );
 };

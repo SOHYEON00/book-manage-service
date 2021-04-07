@@ -3,7 +3,12 @@ export interface userObjType {
     name: string,
     email: string,
     uid: string,
-    isLoggin: false
+    isLoggin: boolean
+};
+
+export interface errorType {
+    code: string,
+    message: string
 };
 
 // props로 전달되는 db 내 도서 아이템 객체 타입

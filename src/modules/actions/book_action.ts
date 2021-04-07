@@ -1,16 +1,5 @@
 import * as types from '../types';
 
-export interface BookDataParams {
-    authors: Array<string>,
-    isbn: string,
-    price: number,
-    publisher: string,
-    sale_price: number,
-    status: string,
-    title: string,
-    thumbnail: string,
-    translators_url: string
-};
 
 interface GetBookListDBAction {
     type: typeof types.GET_LIST_DB_REQUEST
