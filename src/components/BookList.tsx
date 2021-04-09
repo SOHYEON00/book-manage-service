@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import ApiBookList from 'components/ApiBookList';
 import { useDispatch, useSelector } from 'react-redux';
 import {tableStyle, theadStyle} from 'styleComponent';
-import {bookListItemType} from 'propsTypes';
+import {apiBookItemType, bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
 import * as types from 'modules/types';
 
@@ -50,7 +50,6 @@ const BookList = () => {
 
     useEffect(() => {
         const jsonBookList = makeBookListData(list);
-
 
         let filtered;
 
