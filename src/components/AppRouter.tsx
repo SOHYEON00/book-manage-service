@@ -20,7 +20,8 @@ const AppRouter = (props:Props) => {
                     </Route>
                     :
                     <Route exact path='/'>
-                        <Auth />
+                        {/* <Auth /> */}
+                        <MainComponent />
                     </Route>
                 }
             </Switch>
