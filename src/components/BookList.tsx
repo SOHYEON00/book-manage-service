@@ -16,29 +16,57 @@ const BookList = () => {
     const text = useSelector((state:RootState) => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
 
-    // const makeBookListData = (sheetsList:any) => {
-    //     re
-    // };
 
-    // useEffect(() => {
-    //     const bookList = makeBookListData(list);
+    // array to JSON
+    const arrToJson = (arr:Array<string>, properties:Array<string>) => {
+        let object:any = {};
+ 
+        for(let i=0; i<properties.length; i++) {
+            let paramData;
+            if(arr[i] === 'TRUE') {
+                paramData = true;
+            } else if(arr[i] === 'FALSE') {
+                paramData = false;
+            } else {
+                paramData = arr[i];
+            }
+            object[properties[i]] = paramData;
+        }
 
-    //     let filtered;
+        return object;
+    }
+    // 배열로 받은 구글 시트 데이터를 JSON형태로 바꾼다.
+    const makeBookListData = (sheetsList:any) => {
+        let objects = [];
+        
+        const properties = sheetsList[0];
+        for(let i=1; i<sheetsList.length; i++){
+            const object = arrToJson(sheetsList[i], properties);
+            objects.push(object);
+        };
+        
+        return objects;
+    };
 
-    //     if(text !== ''){ // 검색어 있는 경우
-    //         filtered = bookList.filter((listItem:any) => listItem.title.includes(text));
-    //         // console.log(text);
-    //     } else { // 검색어 없는 경우
-    //         filtered = bookList;
-    //     }
+    useEffect(() => {
+        const jsonBookList = makeBookListData(list);
+
+
+        let filtered;
+
+        if(text !== ''){ // 검색어 있는 경우
+            filtered = jsonBookList.filter((listItem:any) => listItem.title.includes(text));
+            // console.log(text);
+        } else { // 검색어 없는 경우
+            filtered = jsonBookList;
+        }
        
-    //     setBookList(filtered); 
-    // }, [text, list]); 
+        setBookList(jsonBookList); 
+    }, [text, list]); 
 
     return (
         <>
         <section>
-            {JSON.stringify(list)}
             <Table hover bordered style={tableStyle}>
                 <thead style={theadStyle}>
                     <tr>
@@ -51,14 +79,14 @@ const BookList = () => {
                 </thead>
                 <tbody>
                     
-                {/* {bookList && bookList.map((item:bookListItemType) => { 
+                {bookList && bookList.map((item:bookListItemType) => { 
                     item.isRent = false; // 대출/반납 기능 구현 시, 여기서 값 변경
                     return (
                         <BookListItem 
                             key={`${item.title}/${item.isbn}`}
                             bookItem={item}
                         />
-                    )})} */}
+                    )})}
                 </tbody>  
             </Table>
         </section>
