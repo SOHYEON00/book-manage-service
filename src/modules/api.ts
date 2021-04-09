@@ -1,19 +1,40 @@
 import axios from "axios";
-import { authInstance, authService, dbService } from "fBase";
+import { authInstance, authService } from "fBase";
+import * as types from 'modules/types';
 
-
-export const getBooks = async() => {
-    return ((await dbService.collection('books').get()).docs).map(doc => ({
-        id: doc.id,
-        authors: doc.data().authors,
-        title: doc.data().title,
-        publisher: doc.data().publisher,
-        isEbook: false,
-        isRent: false,
-        borrower: doc.data().borrwer
-    }));;
+ // client.init으로 client 인증 -> sheets 정보 읽어온다.
+export const getGoogleSheetsData = async() => {
+    // 성공 시, promise의 resolve()를 리턴
+    return await new Promise((resolve, reject) => {
+        gapi.load('client:auth2', async () => {
+            try {
+                const params = {
+                    spreadsheetId: types.spreadsheetId,
+                    ranges: [],
+                    includeGridData: true
+                };
+               gapi.client.init({
+                'apiKey': types.API_KEY,
+                'clientId': types.CLIENT_ID,
+                'scope': types.SCOPE,
+                'discoveryDocs':['https://sheets.googleapis.com/$discovery/rest?version=v4']
+               }).then(async() => {
+                    await gapi.client.sheets.spreadsheets.get(params)
+                        .then((res) => {
+                            resolve(res.result.sheets); // 요청 성공 시, resolve를 통해 api 요쳥 결과값 전달
+                        })
+                        .catch((err) => {console.log(err); reject(err);});
+               })
+            }
+            catch(err) {
+                console.log(err);
+            }
+        })
+    })
 };
 
+
+// firebase를 이용한 구글 로그인 기능
 export const googleLogin = async() => {
     const googleProvider = new authInstance.auth.GoogleAuthProvider();
     const userResponse = await authService.signInWithPopup(googleProvider);
@@ -52,3 +73,5 @@ export const getApiBookList = async(text:string, currentPage:number) => {
     .then((res) => {return res.data})
     .catch((err) => {return err})
 }; 
+
+

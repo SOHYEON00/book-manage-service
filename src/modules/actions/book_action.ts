@@ -15,9 +15,17 @@ interface GetBookListDBActionFail {
     payload: string
 }
 
+interface GetGoogleActionType {
+    type: typeof types.GET_GOOGLE_LIST
+}
+
+export const getGoogleAction = ():GetGoogleActionType => ({
+    type: types.GET_GOOGLE_LIST,
+});
+
 export const getBookListDB = ():GetBookListDBAction => ({
     type: types.GET_LIST_DB_REQUEST,
-})
+});
 
 // //data 타입 확인
 export const getBookListDBSuccess = (bookList:[]):GetBookListDBSuccessAction => ({
@@ -28,10 +36,11 @@ export const getBookListDBSuccess = (bookList:[]):GetBookListDBSuccessAction => 
 export const getBookListDBFail = (payload:string):GetBookListDBActionFail => ({
     type: types.GET_LIST_DB_FAIL,
     payload: payload
-})
+});
 
 export type BookActionsTypes =
     | ReturnType<typeof getBookListDB>
     | ReturnType<typeof getBookListDBSuccess>
-    | ReturnType<typeof getBookListDBFail>;
+    | ReturnType<typeof getBookListDBFail>
+    | ReturnType<typeof getGoogleAction>;
 

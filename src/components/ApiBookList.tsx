@@ -17,28 +17,29 @@ const ApiBookList = () => {
 
     // 카카오 api 요청 -> api로 받은 도서 리스트, 마지막 페이지 set
     const requestApiBookList = () => {
-
         const apiResponse = getApiBookList(text, currentPage); // promise 반환
         apiResponse
             .then((result) => { // { documents: 도서리스트, meta }
                 setApiBookList(result.documents);
                 setEndPage(calEndPage(result.meta.pageable_count));
+                console.log(result);
             })
             .catch((err) => console.log(err));
-       
     };
 
     // 마지막 페이지 계산
     const calEndPage = (posts:number) => {
         const postPerPage = 5;
-        // 요청 시, page는 1~100까지의 정수이므로 100이 넘는지 검사
-        return Math.ceil(posts / postPerPage) > 100 ? 100 : Math.ceil(posts / postPerPage);
+        return Math.ceil(posts / postPerPage) ;
     };
 
     useEffect(() => {
-        // text 값이 있는 경우만 api 요청
+        // 검색어 값이 있는 경우만 api 요청
         if(text !== '') {
             requestApiBookList();
+        } else { // 검색어 값이 없는 경우, 초기화
+            setApiBookList([]);
+            setEndPage(1);
         }
     }, [text, currentPage]);
 
@@ -71,6 +72,7 @@ const ApiBookList = () => {
                         <th>도서 형태</th>
                         <th>판매상황</th>
                         <th>가격</th>
+                        <th>추가하기</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,7 +91,7 @@ const ApiBookList = () => {
                     })}
                 </tbody>
             </Table>
-            {endPage}
+
             <PaginationComponent endPage={endPage} currentPage={currentPage} onClickEvent={onClickPageBox}/>
         </section>
     )

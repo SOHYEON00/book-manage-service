@@ -38,3 +38,11 @@ export interface apiBookItemType {
     isbn: string,
     url: string
 };
+
+export interface sheetsItemType {
+    values: Array<sheetsItemValueType>
+};
+
+export interface sheetsItemValueType {
+    formattedValue: string
+}

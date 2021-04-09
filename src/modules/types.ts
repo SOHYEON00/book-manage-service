@@ -10,6 +10,8 @@ export const GET_LIST_DB_FAIL = 'book/GET_LIST_DB_FAIL' as const; // 실패
 // export const SET_USER_SUCCESS = 'user/SET_USER_SUCCESS';
 // export const SET_USER_FAIL = 'user/SET_USER_FAIL';
 
+export const GET_GOOGLE_LIST = 'google/GET_GOOGLE_LIST' as const;
+
 export const LOGIN_REQUEST = 'user/LOGIN_REQUEST' as const;
 export const LOGIN_SUCCESS = 'user/LOGIN_SUCCESS' as const; 
 export const LOGIN_FAIL = 'user/LOGIN_FAIL' as const;
@@ -22,3 +24,10 @@ export const SET_TEXT_FAIL = 'book/SET_TEXT_FAIL' as const;
 export const SEARCH_API_REQUEST = 'book/SEARCH_API_REQUEST';
 export const SEARCH_API_SUCCESS = 'book/SEARCH_API_SUCCESS';
 export const SEARCH_API_FAIL = 'book/SEARCH_API_FAIL';
+
+
+// google spread sheed 관련 params 변수
+export const spreadsheetId = '19PGyzWr2wRU4-ghmhbVnWLA6LTESip16mnOVfFe8ASM';
+export const API_KEY = 'AIzaSyDSIaut6da5qc1tjQ209fvrFqR0rADHLDA';
+export const CLIENT_ID = '385551841011-itffaf9vbl7ff0tgtuib0d0tq55d8kmr.apps.googleusercontent.com';
+export const SCOPE = 'https://www.googleapis.com/auth/spreadsheets/readonly';
