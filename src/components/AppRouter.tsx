@@ -10,6 +10,7 @@ interface Props {
 
 const AppRouter = (props:Props) => {
     const {userObj} = props;
+    console.log(userObj);
 
     return (
         <BrowserRouter>
@@ -20,8 +21,7 @@ const AppRouter = (props:Props) => {
                     </Route>
                     :
                     <Route exact path='/'>
-                        {/* <Auth /> */}
-                        <MainComponent />
+                        <Auth />
                     </Route>
                 }
             </Switch>
