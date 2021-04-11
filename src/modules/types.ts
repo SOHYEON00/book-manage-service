@@ -27,7 +27,10 @@ export const SEARCH_API_FAIL = 'book/SEARCH_API_FAIL';
 
 
 // google spread sheed 관련 params 변수
-export const spreadsheetId = '19PGyzWr2wRU4-ghmhbVnWLA6LTESip16mnOVfFe8ASM';
-export const API_KEY = 'AIzaSyDSIaut6da5qc1tjQ209fvrFqR0rADHLDA';
-export const CLIENT_ID = '385551841011-itffaf9vbl7ff0tgtuib0d0tq55d8kmr.apps.googleusercontent.com';
-export const SCOPE = 'https://www.googleapis.com/auth/spreadsheets/readonly';
+export const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+// export const spreadsheetId='19PGyzWr2wRU4-ghmhbVnWLA6LTESip16mnOVfFe8ASM';
+// export const CLIENT_ID = '385551841011-kipr196rpa6sdeemomfg8pemlmgkniiq.apps.googleusercontent.com';
+
+export const ADD_BOOK_REQUEST = 'book/ADD_BOOK_REQUEST';
+export const ADD_BOOK_SUCCESS = 'book/ADD_BOOK_SUCCESS';
+export const ADD_BOOK_FAIL = 'book/ADD_BOOK_FAIL';

@@ -19,6 +19,26 @@ interface GetGoogleActionType {
     type: typeof types.GET_GOOGLE_LIST
 }
 
+interface addBookActionType {
+    type: typeof types.ADD_BOOK_REQUEST,
+    payload: []
+}
+
+interface addBookFailActionType {
+    type: typeof types.ADD_BOOK_FAIL,
+    payload: string
+}
+
+export const addBookRequestAction = (newBook:[]):addBookActionType => ({
+    type: types.ADD_BOOK_REQUEST,
+    payload: newBook
+});
+
+export const addBookFailAction = (payload:string):addBookFailActionType => ({
+    type: types.ADD_BOOK_FAIL,
+    payload: payload
+});
+
 export const getGoogleAction = ():GetGoogleActionType => ({
     type: types.GET_GOOGLE_LIST,
 });
@@ -42,5 +62,7 @@ export type BookActionsTypes =
     | ReturnType<typeof getBookListDB>
     | ReturnType<typeof getBookListDBSuccess>
     | ReturnType<typeof getBookListDBFail>
-    | ReturnType<typeof getGoogleAction>;
+    | ReturnType<typeof getGoogleAction>
+    | ReturnType<typeof addBookRequestAction>
+    | ReturnType<typeof addBookFailAction>;
 

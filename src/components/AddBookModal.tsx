@@ -1,21 +1,27 @@
 import { apiBookItemType } from 'propsTypes';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as types from 'modules/types';
 
 interface Props {
     book: apiBookItemType,
     modalHandler: any
 };  
 const AddBookModal = (prop:Props) => {
+    const dispatch = useDispatch();
     const {book, modalHandler} = prop;
     const [title, setTitle] = useState(book.title);
     const [authors, setAuthors] = useState((book.authors).toString());
     const [publisher, setPublisher] = useState(book.publisher);
     const [price, setPrice] = useState(book.price);
+    const [thumbnail, setThumbnail] = useState(book.thumbnail);
+    const [url, setUrl] = useState(book.url);
+    const [isbn, setIsbn] = useState(book.isbn);
 
     const onAddBookSubmit = (event:React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const { value } = event.target;
-        console.log(value);
+        const newBook = [title, publisher, authors, thumbnail, url, '', '', 'FALSE', 'FALSE', isbn];
+        dispatch({ type: types.ADD_BOOK_REQUEST, params:newBook});
     };
 
     const onChangeValue = (event:React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +36,13 @@ const AddBookModal = (prop:Props) => {
                 return setPublisher(value);
             case 'price':
                 return setPrice(parseInt(value));
-        }
+            case 'thumbnail':
+                return setThumbnail(value);
+            case 'url':
+                return setUrl(value);
+            case 'isbn':
+                return setIsbn(value);
+        };
     };
 
     return (
