@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import ApiBookListItem from 'components/ApiBookListItem';
-import {tableStyle, theadStyle} from 'styleComponent';
 import {apiBookItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
 import {getApiBookList} from 'modules/api';
 import PaginationComponent from './Pagination';
 import {LAST_PAGE, MAX_PAGE, PREVIEW_COUNT} from 'modules/types';
+import { titleStyle } from 'styleComponent';
 
 
 
@@ -42,7 +42,7 @@ const ApiBookList = () => {
             requestApiBookList();
         } else { // 검색어 값이 없는 경우, 초기화
             setApiBookList([]);
-            setEndPage(LAST_PAGE);
+            setEndPage(LAST_PAGE); 
             setCurrentPage(LAST_PAGE);
         }
     }, [text, currentPage]);
@@ -66,9 +66,9 @@ const ApiBookList = () => {
 
     return (
         <section>
-
-            <Table hover bordered style={tableStyle}>
-                <thead style={theadStyle}>
+            <p style={titleStyle}>카카오 도서 검색 결과</p>
+            <Table hover bordered className="table">
+                <thead>
                     <tr>
                         <th>도서 표지</th>
                         <th>도서 제목</th>

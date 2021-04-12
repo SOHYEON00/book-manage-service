@@ -2,7 +2,7 @@ import { apiBookItemType } from 'propsTypes';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
-import {tdStyle, addBookFormStyle} from 'styleComponent';
+import {tdStyle} from 'styleComponent';
 import { Button, Form, Modal } from 'react-bootstrap';
 
 interface Props {
@@ -45,12 +45,10 @@ const AddBookModal = (prop:Props) => {
 
     return (
         <tr>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}>
+            <td style={tdStyle} colSpan={8}>
                 
             <Modal.Dialog>
-                <form onSubmit={onAddBookSubmit} style={addBookFormStyle}>
+                <form onSubmit={onAddBookSubmit}>
                     <h4>Add New Book Form</h4>
                     <img src={thumbnail} alt="thumnail img"/>
                     <Form.Label>책 제목</Form.Label><input type="text" value={title} name="title" onChange={onChangeValue}/>
@@ -62,11 +60,6 @@ const AddBookModal = (prop:Props) => {
                 </form>
             </Modal.Dialog>
             </td>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}></td>
-            <td style={tdStyle}></td>
         </tr>
     );
 };

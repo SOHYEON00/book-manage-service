@@ -3,10 +3,9 @@ import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
 import ApiBookList from 'components/ApiBookList';
 import { useDispatch, useSelector } from 'react-redux';
-import {tableStyle, theadStyle} from 'styleComponent';
 import {bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import {titleStyle} from 'styleComponent';
 import PaginationComponent from './Pagination';
 import {LAST_PAGE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
@@ -105,8 +104,9 @@ const BookList = () => {
     return (
         <>
         <section>
-            <Table hover bordered style={tableStyle}>
-                <thead style={theadStyle}>
+            <p style={titleStyle}>HNINE 도서 리스트</p>
+            <Table hover bordered className="table">
+                <thead>
                     <tr>
                         <th>도서 표지</th>
                         <th>도서 제목</th>

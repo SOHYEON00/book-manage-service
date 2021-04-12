@@ -8,6 +8,10 @@ export const titleStyle = {
     color: '#4b5258'
 };
 
+export const errorStyle = {
+    color: 'red'
+}
+
 export const navStyle = {
     padding: 0,
     marginTop: '3rem',
@@ -15,7 +19,7 @@ export const navStyle = {
 };
 
 export const searchFormStyle = {
-    width: '20%',
+    width: '25%',
     justifyContent: 'space-between',
 };
 export const searchInputTextStyle = {
@@ -26,27 +30,7 @@ export const btnStyle = {
     borderColor: '#ced4da',
 };
 
-export const tableStyle = {
-    backgroundColor: '#fff',
-};
-export const theadStyle = {
-    backgroundColor: '#cbcbcc17',
-};
 export const tdStyle = {
-    border: 'none'
+    border: 'none',
 };
 
-export const addBookFormStyle = {
-    display: 'flex',
-    flexDirection : 'column',
-    alignItems: 'center',
-    label: {
-        width: '80%',
-        'padding-top': '1rem',
-        'font-weight': 'bold'
-    },
-    input: {
-        width: '80%'
-    }
-    
-} as React.CSSProperties

@@ -10,7 +10,7 @@ interface Props {
 const BookListItem = (props: Props) => {
     // title, authors, publisher, isEbook, isRent, rentDate, checkRent
     const { bookItem } = props;
-
+    console.log(bookItem);
     const rentBookClick = () => {
         const result = window.confirm(`${bookItem.title} 을/를 대출하시겠습니까?`);
 
@@ -29,14 +29,15 @@ const BookListItem = (props: Props) => {
            <td onClick={() => {window.open(bookItem.url)}}>
                     <img src={bookItem.thumbnail} alt='도서 표지'/>
                 </td>
-                <td>{bookItem.title}</td>
-                <td>{bookItem.authors}</td>
-                <td>{bookItem.publisher}</td>
-                <td>{bookItem.isEbook ? 'Ebook' : '출판도서'}</td>
-            <td>{!bookItem.isRent 
-                ? <Button onClick={rentBookClick}>대출가능</Button> 
-                : <p> {bookItem.borrower} - {bookItem.borrow_date}
-                    </p>}</td>
+                <td className="align-middle">{bookItem.title}</td>
+                <td className="align-middle">{bookItem.authors}</td>
+                <td className="align-middle"> {bookItem.publisher}</td>
+                <td className="align-middle">{bookItem.isEbook ? 'Ebook' : '출판도서'}</td>
+                <td className="align-middle">
+                    {!bookItem.isRent 
+                    ? <Button onClick={rentBookClick}>대출가능</Button> 
+                    : <p> {bookItem.borrower} - {bookItem.borrow_date} </p>}
+                </td>
             
         </tr>
     );

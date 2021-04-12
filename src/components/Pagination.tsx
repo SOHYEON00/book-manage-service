@@ -102,7 +102,7 @@ const PaginationComponent = (prop:Props) => {
 
 
     return (
-        <section>
+        <section className="pagenationSection">
             <Pagination>
                 {pageBoxList.map((item:pageBoxType, index) => {
                     const active = (item.pageNum === currentPage) ? true : false;
