@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react';
 import BookListItem from 'components/BookListItem';
 import Table from 'react-bootstrap/Table';
 import ApiBookList from 'components/ApiBookList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
+
 import {titleStyle} from 'styleComponent';
 import PaginationComponent from './Pagination';
 import {LAST_PAGE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
 
 const BookList = () => {
-    const list = useSelector((state:RootState) => {
-        return state.bookReducer.books;
-    });
-    
     const text = useSelector((state:RootState) => state.searchReducer.text);
+    const list = useSelector((state:RootState) => state.bookReducer.books);
     const [bookList, setBookList] = useState(list);
     const [endPage, setEndPage] = useState(LAST_PAGE); // 마지막 페이지
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
@@ -28,6 +26,7 @@ const BookList = () => {
         if(clickedElem.type === 'page') {
             setCurrentPage(clickedElem.pageNum);
         } else if(clickedElem.type === 'next') {
+
             setCurrentPage(currentPage + PREVIEW_COUNT);
         } else if(clickedElem.type === 'prev') {
             setCurrentPage(currentPage - PREVIEW_COUNT);
@@ -94,10 +93,10 @@ const BookList = () => {
                 return listItem.title.includes(text);
 
             });
+
         } else { // 검색어 없는 경우
             filtered = jsonBookList;
         }
-
 
         setEndPage(calEndPage(filtered.length));
         setBookList(printPostByPage(currentPage, filtered)); 
@@ -131,7 +130,9 @@ const BookList = () => {
                     )})}
                 </tbody>  
             </Table>
+
             <PaginationComponent endPage={endPage} currentPage={currentPage} onClickEvent={onClickPageBox} />
+
         </section>
         <hr />
         <ApiBookList />

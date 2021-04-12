@@ -44,6 +44,7 @@ const ApiBookList = () => {
             setApiBookList([]);
             setEndPage(LAST_PAGE); 
             setCurrentPage(LAST_PAGE);
+
         }
     }, [text, currentPage]);
 
