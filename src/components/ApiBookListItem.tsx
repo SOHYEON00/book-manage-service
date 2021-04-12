@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {apiBookItemType} from 'propsTypes';
 import { Button } from 'react-bootstrap';
-import AddBookModal from './AddBookModal';
+import ModalComponent from 'modal_portal/AddBookModal';
 
 interface Props {
     book: apiBookItemType
@@ -22,7 +22,7 @@ const ApiBookListItem = (props:Props) => {
     return (
         <>
             {modalOpen && 
-                <AddBookModal book={book} modalHandler={modalHandler}/>
+                <ModalComponent book={book} modalHandler={modalHandler}/>
             }
 
             

@@ -1,6 +1,7 @@
 $white: #fff;
 $grayColor: #cbcbcc17;
 $submitColor: #007bff;
+$modalBackgoundColor: #2d2d306e;
 
 table {
     background-color: $white;
@@ -15,6 +16,22 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.modalContainer {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    background-color: $modalBackgoundColor;
+}
+
+.modalDiv {
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 form {

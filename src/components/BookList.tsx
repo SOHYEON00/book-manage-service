@@ -11,8 +11,10 @@ import {LAST_PAGE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
 
 const BookList = () => {
-    const dispatch = useDispatch();
-    const list = useSelector((state:RootState) => state.bookReducer.books);
+    const list = useSelector((state:RootState) => {
+        return state.bookReducer.books;
+    });
+    
     const text = useSelector((state:RootState) => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
     const [endPage, setEndPage] = useState(LAST_PAGE); // 마지막 페이지
