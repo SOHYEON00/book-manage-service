@@ -7,6 +7,8 @@ import {tableStyle, theadStyle} from 'styleComponent';
 import {bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import PaginationComponent from './Pagination';
+import {LAST_PAGE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
 
 const BookList = () => {
@@ -14,6 +16,36 @@ const BookList = () => {
     const list = useSelector((state:RootState) => state.bookReducer.books);
     const text = useSelector((state:RootState) => state.searchReducer.text);
     const [bookList, setBookList] = useState(list);
+    const [endPage, setEndPage] = useState(LAST_PAGE); // 마지막 페이지
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
+
+    const onClickPageBox = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const { id } = e.target;
+        const clickedElem = JSON.parse(id);
+
+        // 클릭된 페이지박스 타입별 동작
+        if(clickedElem.type === 'page') {
+            setCurrentPage(clickedElem.pageNum);
+        } else if(clickedElem.type === 'next') {
+            setCurrentPage(currentPage + PREVIEW_COUNT);
+        } else if(clickedElem.type === 'prev') {
+            setCurrentPage(currentPage - PREVIEW_COUNT);
+        } else { // 예외
+            setCurrentPage(currentPage);
+        }
+    };
+
+    // 한 페이지 당, POSTS_PER_PAGE개씩 출력
+    const printPostByPage = (page:number, list:any) => {
+        return list.slice(POSTS_PER_PAGE*(page-1), POSTS_PER_PAGE*page);
+    };
+
+    const calEndPage = (posts:number) => {
+        // 최대 요청 페이지 수를 넘을 경우
+        return Math.ceil(posts / POSTS_PER_PAGE);
+    };
+
+    // ---- book list 관련 ---
 
     // array to JSON
     const arrToJson = (arr:Array<string>, properties:Array<string>) => {
@@ -32,7 +64,7 @@ const BookList = () => {
             object[properties[i]] = paramData;
         } 
         return object;
-    }
+    };
 
     // 배열로 받은 구글 시트 데이터를 JSON형태로 바꾼다.
     const makeBookListData = (sheetsList:any) => {
@@ -64,9 +96,11 @@ const BookList = () => {
         } else { // 검색어 없는 경우
             filtered = jsonBookList;
         }
-       
-        setBookList(filtered); 
-    }, [text, list]); 
+
+
+        setEndPage(calEndPage(filtered.length));
+        setBookList(printPostByPage(currentPage, filtered)); 
+    }, [text, list, currentPage]); 
 
     return (
         <>
@@ -95,6 +129,7 @@ const BookList = () => {
                     )})}
                 </tbody>  
             </Table>
+            <PaginationComponent endPage={endPage} currentPage={currentPage} onClickEvent={onClickPageBox} />
         </section>
         <hr />
         <ApiBookList />

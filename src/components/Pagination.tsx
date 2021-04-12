@@ -18,6 +18,8 @@ const PaginationComponent = (prop:Props) => {
     const [pageBoxList, setPageBoxList] = useState<Array<pageBoxType>>([]);
     const firstPage = 1; // 첫번째 페이지
 
+    console.log(endPage, currentPage);
+
      // 현제 페이지 위치와 앞,뒤 2개의 페이지 출력 ex) ...4,5,6,7,8...
     const continueMiddlePageBox = (current:number, array:Array<pageBoxType>) => {
         for(let i=current-2; i<=current+2; i++) {
@@ -25,6 +27,7 @@ const PaginationComponent = (prop:Props) => {
         }
         return array; // 리턴: 배열값
     };
+    
 
     // 현재 페이지위치가 맨 끝(처음, 마지막) 포함 2개일 때 (1,2,3 or 마지막페이지-2 ~ 마지막페이지)
     const continueEndPageBox = (page1:number, page2:number, array:Array<pageBoxType>) => {
@@ -38,6 +41,10 @@ const PaginationComponent = (prop:Props) => {
         } else {
             from = page2;
             to = page1;
+        }
+
+        if(from <= 10) { // 총 페이지 넘버가 10이 넘지 않는 경우, 1~10까지 전체 출력
+            from = firstPage;
         }
 
         for(let i=from; i<=to; i++) {
@@ -84,7 +91,7 @@ const PaginationComponent = (prop:Props) => {
     useEffect(() => {
 
         // 페이지네이션 출력
-        if(endPage === firstPage ) { // 1페이지만 있는 경우
+        if(endPage <= 5) { // 최대 페이지가 10개인 경우: 1~10까지 모두 출력
             const arr = continueEndPageBox(currentPage, endPage, []);
             setPageBoxList(arr);
         }

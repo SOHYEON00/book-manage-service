@@ -34,3 +34,8 @@ export const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 export const ADD_BOOK_REQUEST = 'book/ADD_BOOK_REQUEST';
 export const ADD_BOOK_SUCCESS = 'book/ADD_BOOK_SUCCESS';
 export const ADD_BOOK_FAIL = 'book/ADD_BOOK_FAIL';
+
+export const MAX_PAGE = 100; // 카카오 api 최대 요청 페이지 수 
+export const LAST_PAGE = 1;
+export const PREVIEW_COUNT = 3; // 페이지넘버 리스트 프리뷰 카운트
+export const POSTS_PER_PAGE = 5;
