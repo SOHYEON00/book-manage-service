@@ -9,10 +9,10 @@ interface Props {
 
 const BookListItem = (props: Props) => {
     // title, authors, publisher, isEbook, isRent, rentDate, checkRent
-    const { authors, publisher, title, isEbook, isRent } = props.bookItem;
+    const { bookItem } = props;
 
     const rentBookClick = () => {
-        const result = window.confirm(`${title} 을/를 대출하시겠습니까?`);
+        const result = window.confirm(`${bookItem.title} 을/를 대출하시겠습니까?`);
 
         if(result) { // 대출 선택
             // 대출한다
@@ -26,13 +26,17 @@ const BookListItem = (props: Props) => {
 
     return(
         <tr>
-            <td>{title}</td>
-            <td>{authors}</td>
-            <td>{publisher}</td>           
-            <td>{isEbook ? 'Ebook' : '출판도서'}</td>
-            <td>{!isRent 
+           <td onClick={() => {window.open(bookItem.url)}}>
+                    <img src={bookItem.thumbnail} alt='도서 표지'/>
+                </td>
+                <td>{bookItem.title}</td>
+                <td>{bookItem.authors}</td>
+                <td>{bookItem.publisher}</td>
+                <td>{bookItem.isEbook ? 'Ebook' : '출판도서'}</td>
+            <td>{!bookItem.isRent 
                 ? <Button onClick={rentBookClick}>대출가능</Button> 
-                : '대출불가'}</td>
+                : <p> {bookItem.borrower} - {bookItem.borrow_date}
+                    </p>}</td>
             
         </tr>
     );

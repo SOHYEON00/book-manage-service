@@ -32,3 +32,21 @@ export const tableStyle = {
 export const theadStyle = {
     backgroundColor: '#cbcbcc17',
 };
+export const tdStyle = {
+    border: 'none'
+};
+
+export const addBookFormStyle = {
+    display: 'flex',
+    flexDirection : 'column',
+    alignItems: 'center',
+    label: {
+        width: '80%',
+        'padding-top': '1rem',
+        'font-weight': 'bold'
+    },
+    input: {
+        width: '80%'
+    }
+    
+} as React.CSSProperties

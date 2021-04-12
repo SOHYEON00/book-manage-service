@@ -13,16 +13,16 @@ export interface errorType {
 
 // props로 전달되는 db 내 도서 아이템 객체 타입
 export interface bookListItemType {
-    thumbnail: string,
     title: string,
-    authors: Array<string>,
     publisher: string,
-    isEbook: boolean,
-    isbn: string,
+    authors: Array<string>,
+    thumbnail: string,
     url: string,
-    isRent: boolean,
     borrower: string,
-    borrow_data: string
+    borrow_date: string
+    isEbook: boolean,
+    isRent: boolean,
+    isbn: string,
 };
 
 // props로 전달되는 api 결과값 도서 아이템 객체 타입

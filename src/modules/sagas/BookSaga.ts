@@ -46,7 +46,6 @@ function* getBookListDBSaga() {
 
 // 도서 추가 API 실행
 function* addBookSaga(params:any) {
-    console.log(params);
     try {
         const response:[] = yield call(api.addBookGoogleSheet, params);
         yield put({ type: types.GET_LIST_DB_REQUEST}); //추가 후, 변경된 시트 데이터 읽어오기

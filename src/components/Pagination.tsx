@@ -51,8 +51,13 @@ const PaginationComponent = (prop:Props) => {
     const makePageBoxList = (firstPage:number, currentPage:number, endPage:number) => {
         let tempList:Array<pageBoxType> = [];
 
+        // api 결과값이 없는 경우 (endPage === 0)
+        if(endPage === 0) {
+            tempList = [];
+        }
+
         // 현재 페이지 위치:1 ~ 3  
-        if(currentPage <= firstPage + 2)  {
+        else if(currentPage <= firstPage + 2)  {
             continueEndPageBox(firstPage, firstPage+3, tempList);
             tempList.push({ pageNum: 0, type: 'next'});
             tempList.push({ pageNum: endPage, type: 'page'});
@@ -77,11 +82,6 @@ const PaginationComponent = (prop:Props) => {
     };
 
     useEffect(() => {
-        // 잘못된 값이 입력된 경우.
-        if(endPage < currentPage) {
-            console.log('Error: endPage는 currentPage보다 작을 수 없습니다.');
-            
-        } 
 
         // 페이지네이션 출력
         if(endPage === firstPage ) { // 1페이지만 있는 경우

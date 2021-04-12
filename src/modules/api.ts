@@ -25,7 +25,6 @@ export const addBookGoogleSheet = async(data:any) => {
                 };
                 await gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody)
                 .then((res) => {
-                    console.log(res.result);
                     resolve(res.result);
                 })
                     .catch((err) => {
