@@ -2,7 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
 
-const Auth = () => {
+interface Props {
+    error?: string
+};
+
+const Auth = (props:Props) => {
+    const {error} = props;
+
     const dispatch = useDispatch();
 
     const onGoogleClick = () => {
@@ -14,6 +20,7 @@ const Auth = () => {
             <button onClick={onGoogleClick} name='google' >
                 Google 이메일로 로그인하기
             </button>
+            <h4>{error}</h4>
         </div>
     );
 };

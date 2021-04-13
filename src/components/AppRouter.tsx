@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Auth from './Auth';
 import { userObjType } from 'propsTypes';
@@ -10,14 +10,26 @@ interface Props {
 
 const AppRouter = (props:Props) => {
     const {userObj} = props;
-    console.log(userObj);
+    const [isHniner, setIsHniner] = useState(false);
+
+    useEffect(() => {
+        if(userObj.email !== undefined) {
+            
+            const emailDomain = (userObj.email).slice(-9);
+            console.log(emailDomain);
+
+            (emailDomain === 'hnine.com') ? setIsHniner(true) : setIsHniner(false);
+        }
+        
+    }, [userObj]);
 
     return (
         <BrowserRouter>
             <Switch>
                 {userObj.isLoggin ? 
                     <Route exact path='/'>
-                        <MainComponent />
+                        { isHniner ? <MainComponent /> : <Auth error={'에이치나인 임직원이 아닙니다.'}/>}
+                        
                     </Route>
                     :
                     <Route exact path='/'>
