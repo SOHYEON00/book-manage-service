@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
-import {searchFormStyle, searchInputTextStyle, btnStyle} from 'styleComponent';
+import {searchInputTextStyle, btnStyle} from 'styleComponent';
 import _ from 'lodash';
 
 
@@ -33,7 +33,7 @@ const Searchbar = () => {
 
     return(
         
-        <Form inline onSubmit={onSubmitText} style={searchFormStyle}>
+        <Form inline onSubmit={onSubmitText}>
             <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={searchInputTextStyle}/>
             <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
         </Form>

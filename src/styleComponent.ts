@@ -18,13 +18,12 @@ export const navStyle = {
     marginBottom: '1rem'
 };
 
-export const searchFormStyle = {
-    width: '25%',
-    justifyContent: 'space-between',
-};
+
 export const searchInputTextStyle = {
-    width: '80%',
+    width: '15rem',
+    marginRight: '1rem',
 };
+
 export const btnStyle = {
     backgroundColor: '#fff',
     borderColor: '#ced4da',

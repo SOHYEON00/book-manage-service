@@ -1,4 +1,4 @@
-import React, { ReactEventHandler } from 'react';
+import React from 'react';
 import {Button} from 'react-bootstrap';
 import {bookListItemType, bookRentType, userObjType} from 'propsTypes';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,6 @@ interface Props {
 
 
 const BookListItem = (props: Props) => {
-    // title, authors, publisher, isEbook, isRent, rentDate, checkRent
     const { bookItem} = props;
     const dispatch = useDispatch();
 
@@ -40,7 +39,9 @@ const BookListItem = (props: Props) => {
 
         if(result) { // 대출or반납 선택
             const today = new Date();
-            const borrowDate = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+            const month = (today.getMonth()+1 < 10) ? `0${today.getMonth()+1}` : `${today.getMonth()+1}`;
+            const day = (today.getDate() < 10) ? `0${today.getDate()}` : `${today.getDate()}`;
+            const borrowDate = `${today.getFullYear()}-${month}-${day}`;
             
             // 시트 내용 update parameter
             const rentInfo:bookRentType = {
