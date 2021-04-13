@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/book-manage-service/static/css/main.f2fb525d.chunk.css",
+    "main.js": "/book-manage-service/static/js/main.fc201fea.chunk.js",
+    "main.js.map": "/book-manage-service/static/js/main.fc201fea.chunk.js.map",
+    "runtime-main.js": "/book-manage-service/static/js/runtime-main.f61cb404.js",
+    "runtime-main.js.map": "/book-manage-service/static/js/runtime-main.f61cb404.js.map",
+    "static/css/2.150d169a.chunk.css": "/book-manage-service/static/css/2.150d169a.chunk.css",
+    "static/js/2.dcdb19f0.chunk.js": "/book-manage-service/static/js/2.dcdb19f0.chunk.js",
+    "static/js/2.dcdb19f0.chunk.js.map": "/book-manage-service/static/js/2.dcdb19f0.chunk.js.map",
+    "index.html": "/book-manage-service/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/book-manage-service/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.f2fb525d.chunk.css.map": "/book-manage-service/static/css/main.f2fb525d.chunk.css.map",
+    "static/js/2.dcdb19f0.chunk.js.LICENSE.txt": "/book-manage-service/static/js/2.dcdb19f0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f61cb404.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.dcdb19f0.chunk.js",
+    "static/css/main.f2fb525d.chunk.css",
+    "static/js/main.fc201fea.chunk.js"
+  ]
+}
