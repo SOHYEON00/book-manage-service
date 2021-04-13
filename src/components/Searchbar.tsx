@@ -31,7 +31,7 @@ const Searchbar = () => {
     }
 
     return(
-        <Navbar>
+        <Navbar style={{padding:'0'}}>
             <Form inline onSubmit={onSubmitText}>
                 <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} />
                 <button type="submit">검색</button>
