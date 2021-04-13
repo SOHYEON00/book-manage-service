@@ -6,11 +6,14 @@ import * as types from 'modules/types';
 import { useDispatch } from 'react-redux';
 
 interface Props {
-    book: apiBookItemType,
-    modalHandler: any
+    book: apiBookItemType;
+    modalHandler: any;
 };  
 
 const ModalComponent = (props:Props) =>  {
+    // react portal 사용
+    const rootModal = document.getElementById('root-modal') as Element;
+    const dispatch = useDispatch();
 
     // book item 정보
     const {book, modalHandler} = props;
@@ -19,9 +22,6 @@ const ModalComponent = (props:Props) =>  {
     const [publisher, setPublisher] = useState(book.publisher);
     const [price, setPrice] = useState(book.price);
     const [url, setUrl] = useState(book.url);
-
-    const rootModal = document.getElementById('root-modal') as Element;
-    const dispatch = useDispatch();
 
     const onChangeValue = (event:React.ChangeEvent<HTMLInputElement>) => {
         const {value, name} = event.target;
@@ -46,8 +46,8 @@ const ModalComponent = (props:Props) =>  {
         const thumbnail = book.thumbnail;
 
         const newBook = [title, publisher, authors, thumbnail, url, 'null', 'null', 'FALSE', 'FALSE', isbn];
-        dispatch({ type: types.ADD_BOOK_REQUEST, payload:newBook});
-        modalHandler();
+        dispatch({ type: types.ADD_BOOK_REQUEST, payload:newBook}); // 도서 추가 api dispatch
+        modalHandler(); // close modal
     };
 
 

@@ -10,23 +10,12 @@ import {PAGE_NUMBER_ONE, MAX_PAGE, PREVIEW_COUNT} from 'modules/types';
 import { titleStyle } from 'styleComponent';
 
 
-
 const ApiBookList = () => {
     const text = useSelector((state:RootState) => state.searchReducer.text);
+
     const [apiBookList, setApiBookList] = useState([]);
     const [endPage, setEndPage] = useState(PAGE_NUMBER_ONE); // 마지막 페이지
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
-
-    // 카카오 api 요청 -> api로 받은 도서 리스트, 마지막 페이지 set
-    const requestApiBookList = () => {
-        const apiResponse = getApiBookList(text, currentPage); // promise 반환
-        apiResponse
-            .then((result) => { // { documents: 도서리스트, meta }
-                setApiBookList(result.documents);
-                setEndPage(calEndPage(result.meta.pageable_count));
-            })
-            .catch((err) => console.log(err));
-    };
 
     // 마지막 페이지 계산
     const calEndPage = (posts:number) => {
@@ -37,14 +26,24 @@ const ApiBookList = () => {
     };
 
     useEffect(() => {
-        // 검색어 값이 있는 경우만 api 요청
+        // 카카오 api 요청 -> api로 받은 도서 리스트, 마지막 페이지 set
+        const requestApiBookList = () => {
+            const apiResponse = getApiBookList(text, currentPage); // promise 반환
+            apiResponse
+                .then((result) => { // { documents: 도서리스트, meta }
+                    setApiBookList(result.documents);
+                    setEndPage(calEndPage(result.meta.pageable_count));
+                })
+                .catch((err) => console.log(err));
+        };
+
+        // 검색어 값이 있는 경우 -> api 요청
         if(text !== '') {
             requestApiBookList();
-        } else { // 검색어 값이 없는 경우, 초기화
+        } else { // 검색어 값이 없는 경우 -> 초기화
             setApiBookList([]);
             setEndPage(PAGE_NUMBER_ONE); 
             setCurrentPage(PAGE_NUMBER_ONE);
-
         }
     }, [text, currentPage]);
 

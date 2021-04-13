@@ -5,8 +5,8 @@ import { userObjType } from 'propsTypes';
 import MainComponent from './MainComponent';
 
 interface Props {
-    userObj: userObjType,
-    error: any
+    userObj: userObjType;
+    error: any;
 };
 
 const AppRouter = (props:Props) => {

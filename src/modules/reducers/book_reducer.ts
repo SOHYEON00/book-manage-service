@@ -3,8 +3,9 @@ import { BookActionsTypes} from '../actions/book_action';
 import * as types from '../types';
 
 interface initialStateType {
-    books: Array<bookListItemType>
-}
+    books: Array<bookListItemType>;
+};
+
 export const initialState:initialStateType = {
     books: []
 };

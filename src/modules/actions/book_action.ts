@@ -1,19 +1,16 @@
 import { bookRentType } from 'propsTypes';
 import * as types from '../types';
 
-
-
-
 // ADD 
 interface addBookActionType {
-    type: typeof types.ADD_BOOK_REQUEST,
-    payload: []
-}
+    type: typeof types.ADD_BOOK_REQUEST;
+    payload: [];
+};
 
 interface addBookFailActionType {
-    type: typeof types.ADD_BOOK_FAIL,
-    payload: string
-}
+    type: typeof types.ADD_BOOK_FAIL;
+    payload: string;
+};
 
 export const addBookRequestAction = (newBook:[]):addBookActionType => ({
     type: types.ADD_BOOK_REQUEST,
@@ -27,18 +24,18 @@ export const addBookFailAction = (payload:string):addBookFailActionType => ({
 
 // GET
 interface GetBookListDBAction {
-    type: typeof types.GET_LIST_DB_REQUEST
-}
+    type: typeof types.GET_LIST_DB_REQUEST;
+};
 
 interface GetBookListDBSuccessAction {
-    type: typeof types.GET_LIST_DB_SUCCESS,
-    payload: []
-}
+    type: typeof types.GET_LIST_DB_SUCCESS;
+    payload: [];
+};
 
 interface GetBookListDBActionFail {
-    type: typeof types.GET_LIST_DB_FAIL,
-    payload: string
-}
+    type: typeof types.GET_LIST_DB_FAIL;
+    payload: string;
+};
 
 export const getBookListDB = ():GetBookListDBAction => ({
     type: types.GET_LIST_DB_REQUEST,
@@ -56,26 +53,18 @@ export const getBookListDBFail = (payload:string):GetBookListDBActionFail => ({
 
 // UPDATE
 interface UpdateBookActionType {
-    type: typeof types.UPDATE_BOOK_RENT_REQUEST,
-    payload: bookRentType
-}
-
-interface UpdateBookSuccessActionType {
-    type: typeof types.UPDATE_BOOK_RENT_SUCCESS,
-}
+    type: typeof types.UPDATE_BOOK_RENT_REQUEST;
+    payload: bookRentType;
+};
 
 interface UpdateBookFailActionType {
-    type: typeof types.UPDATE_BOOK_RENT_FAIL,
-    payload: string
-}
+    type: typeof types.UPDATE_BOOK_RENT_FAIL;
+    payload: string;
+};
 
 export const updateBookRentAction = (payload:bookRentType):UpdateBookActionType => ({
     type: types.UPDATE_BOOK_RENT_REQUEST,
     payload: payload 
-});
-
-export const updateBookRentSuccessAction = ():UpdateBookSuccessActionType => ({
-    type: types.UPDATE_BOOK_RENT_SUCCESS,
 });
 
 export const updateBookRentFailAction = (payload:''):UpdateBookFailActionType => ({
@@ -91,6 +80,5 @@ export type BookActionsTypes =
     | ReturnType<typeof addBookRequestAction>
     | ReturnType<typeof addBookFailAction>
     | ReturnType<typeof updateBookRentAction>
-    | ReturnType<typeof updateBookRentSuccessAction>
     | ReturnType<typeof updateBookRentFailAction>;
 

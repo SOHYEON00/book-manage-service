@@ -3,16 +3,16 @@ import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
 
 interface Props {
-    error?: string
+    error?: string;
 };
 
 const Auth = (props:Props) => {
-    const {error} = props;
+    const {error} = props; // 임직원이 아닌 경우 error
 
     const dispatch = useDispatch();
 
     const onGoogleClick = () => {
-        dispatch({type: types.LOGIN_REQUEST});
+        dispatch({type: types.LOGIN_REQUEST}); // 구글로그인
     };
 
     return (

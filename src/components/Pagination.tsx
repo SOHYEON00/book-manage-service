@@ -1,23 +1,22 @@
+import { PAGE_NUMBER_ONE } from 'modules/types';
 import React, { useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 
 interface Props {
-    endPage: number,
-    currentPage: number,
-    onClickEvent: any
+    endPage: number;
+    currentPage: number;
+    onClickEvent: any;
 };
 
 interface pageBoxType {
-    pageNum: number,
-    type: string // page, prev, next
+    pageNum: number;
+    type: string; // page, prev, next
 };
 
 
 const PaginationComponent = (prop:Props) => {
     const {endPage, currentPage, onClickEvent} = prop; // end page number
     const [pageBoxList, setPageBoxList] = useState<Array<pageBoxType>>([]);
-    const firstPage = 1; // 첫번째 페이지
-
 
      // 현제 페이지 위치와 앞,뒤 2개의 페이지 출력 ex) ...4,5,6,7,8...
     const continueMiddlePageBox = (current:number, array:Array<pageBoxType>) => {
@@ -43,7 +42,7 @@ const PaginationComponent = (prop:Props) => {
         }
 
         if(from <= 10) { // 총 페이지 넘버가 10이 넘지 않는 경우, 1~10까지 전체 출력
-            from = firstPage;
+            from = PAGE_NUMBER_ONE;
         }
 
         for(let i=from; i<=to; i++) {
@@ -52,50 +51,49 @@ const PaginationComponent = (prop:Props) => {
         return array; // 리턴: 배열값
     };
 
-
-
-    const makePageBoxList = (firstPage:number, currentPage:number, endPage:number) => {
-        let tempList:Array<pageBoxType> = [];
-
-        // api 결과값이 없는 경우 (endPage === 0)
-        if(endPage === 0) {
-            tempList = [];
-        }
-
-        // 현재 페이지 위치:1 ~ 3  
-        else if(currentPage <= firstPage + 2)  {
-            continueEndPageBox(firstPage, firstPage+3, tempList);
-            tempList.push({ pageNum: 0, type: 'next'});
-            tempList.push({ pageNum: endPage, type: 'page'});
-        } 
-        
-        // 현재 페이지 위치: 마지막 3개 (endPage-2 ~ endPage)
-        else if(currentPage >= endPage - 2) {
-            tempList.push({ pageNum: firstPage, type: 'page'});
-            tempList.push({ pageNum: 0, type: 'prev'});
-            continueEndPageBox(endPage-3, endPage, tempList);
-        } 
-        // 그 외의 범위
-        else {
-            tempList.push({ pageNum: firstPage, type: 'page'});
-            tempList.push({ pageNum: 0, type: 'prev'});
-            continueMiddlePageBox(currentPage, tempList);
-            tempList.push({ pageNum: 0, type: 'next'});
-            tempList.push({ pageNum: endPage, type: 'page'});
-        }
-        return tempList;
-
-    };
-
     useEffect(() => {
+        // 페이지박스 리스트 반환
+        const makePageBoxList = (firstPage:number, currentPage:number, endPage:number) => {
+            let tempList:Array<pageBoxType> = [];
+
+            // api 결과값이 없는 경우 (endPage === 0)
+            if(endPage === 0) {
+                tempList = [];
+            }
+
+            // 현재 페이지 위치:1 ~ 3  
+            else if(currentPage <= firstPage + 2)  {
+                continueEndPageBox(firstPage, firstPage+3, tempList);
+                tempList.push({ pageNum: 0, type: 'next'});
+                tempList.push({ pageNum: endPage, type: 'page'});
+            } 
+            
+            // 현재 페이지 위치: 마지막 3개 (endPage-2 ~ endPage)
+            else if(currentPage >= endPage - 2) {
+                tempList.push({ pageNum: firstPage, type: 'page'});
+                tempList.push({ pageNum: 0, type: 'prev'});
+                continueEndPageBox(endPage-3, endPage, tempList);
+            } 
+            // 그 외의 범위
+            else {
+                tempList.push({ pageNum: firstPage, type: 'page'});
+                tempList.push({ pageNum: 0, type: 'prev'});
+                continueMiddlePageBox(currentPage, tempList);
+                tempList.push({ pageNum: 0, type: 'next'});
+                tempList.push({ pageNum: endPage, type: 'page'});
+            }
+            return tempList;
+
+        };
+
 
         // 페이지네이션 출력
-        if(endPage <= 5) { // 최대 페이지가 10개인 경우: 1~10까지 모두 출력
+        if(endPage <= 5) { // 최대 페이지가 5개인 경우: 1~5까지 모두 출력
             const arr = continueEndPageBox(currentPage, endPage, []);
             setPageBoxList(arr);
         }
         else {
-            setPageBoxList(makePageBoxList(firstPage, currentPage, endPage));
+            setPageBoxList(makePageBoxList(PAGE_NUMBER_ONE, currentPage, endPage));
         }
     }, [currentPage, endPage]);
 
