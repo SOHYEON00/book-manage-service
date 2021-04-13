@@ -2,6 +2,38 @@ $white: #fff;
 $grayColor: #cbcbcc17;
 $submitColor: #007bff;
 $modalBackgoundColor: #2d2d306e;
+$mainColor: #f0f2f5;
+$titleColor: #4b5258;
+
+main {
+    padding: 6rem 3rem;
+    background-color: $mainColor;
+};
+
+h5 {
+    color: $titleColor
+};
+
+nav {
+    padding: 0;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+
+    input {
+        width: 15rem;
+        margin-right: 1rem;
+    }
+    button {
+        border: 1px solid #6c757d57;
+        background-color: $white;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+    }
+    
+};
+
 
 table {
     background-color: $white;
@@ -9,7 +41,9 @@ table {
     thead{  
         background-color: $grayColor;
     };
-
+    img:hover {
+        box-shadow: 2px 2px 15px -2px rgb(50, 50, 50);
+    }
 }
 
 .pagenationSection {

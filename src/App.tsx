@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {useSelector} from 'react-redux';
 import AppRouter from 'components/AppRouter';
-import {mainStyle, titleStyle} from 'styleComponent';
 import { RootState } from 'modules/reducers';
 import 'style.scss';
 
@@ -12,9 +11,9 @@ const App = () => {
 
   return (
     <>
-      <main style={mainStyle}>
-        <p style={titleStyle}>도서 관리 서비스</p>
-          <AppRouter userObj={userObj} error={error}/>
+      <main>
+        <h5>도서 관리 서비스</h5>
+        <AppRouter userObj={userObj} error={error}/>
       </main>
     </>
   );

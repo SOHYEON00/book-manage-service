@@ -7,7 +7,6 @@ import { RootState } from 'modules/reducers';
 import {getApiBookList} from 'modules/api';
 import PaginationComponent from './Pagination';
 import {PAGE_NUMBER_ONE, MAX_PAGE, PREVIEW_COUNT} from 'modules/types';
-import { titleStyle } from 'styleComponent';
 
 
 const ApiBookList = () => {
@@ -66,7 +65,7 @@ const ApiBookList = () => {
 
     return (
         <section>
-            <p style={titleStyle}>카카오 도서 검색 결과</p>
+            <h5>카카오 도서 검색 결과</h5>
             <Table hover bordered className="table">
                 <thead>
                     <tr>

@@ -3,7 +3,6 @@ import { Navbar } from 'react-bootstrap';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
-import {searchInputTextStyle, btnStyle, navStyle} from 'styleComponent';
 import _ from 'lodash';
 
 
@@ -32,10 +31,10 @@ const Searchbar = () => {
     }
 
     return(
-        <Navbar style={navStyle}>
+        <Navbar>
             <Form inline onSubmit={onSubmitText}>
-                <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={searchInputTextStyle}/>
-                <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
+                <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} />
+                <button type="submit">검색</button>
             </Form>
         </Navbar>
     );

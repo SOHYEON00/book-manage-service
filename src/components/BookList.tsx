@@ -5,8 +5,6 @@ import ApiBookList from 'components/ApiBookList';
 import { useSelector } from 'react-redux';
 import {bookListItemType} from 'propsTypes';
 import { RootState } from 'modules/reducers';
-
-import {titleStyle} from 'styleComponent';
 import PaginationComponent from './Pagination';
 import {PAGE_NUMBER_ONE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
@@ -59,7 +57,6 @@ const BookList = () => {
                 paramData = arr[i];
             }
             object[properties[i]] = paramData;
-            
         } 
         return object;
     };
@@ -84,7 +81,7 @@ const BookList = () => {
         };
 
         const jsonBookList = makeBookListData(list); // array -> object로 변환한 도서 리스트
-
+ 
         let filtered;
         if(text !== ''){ // 검색어 있는 경우, 검색어가 title로 포함된 도서만 반환
 
@@ -108,7 +105,7 @@ const BookList = () => {
     return (
         <>
         <section>
-            <p style={titleStyle}>HNINE 도서 리스트</p>
+            <h5>HNINE 도서 리스트</h5>
             <Table hover bordered className="table">
                 <thead>
                     <tr>

@@ -42,7 +42,7 @@ export interface apiBookItemType {
     isEbook: boolean;
     status: string;
     price: number;
-    salePrice: number;
+    sale_price: number;
     isbn: string;
     url: string;
 };

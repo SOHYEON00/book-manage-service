@@ -61,7 +61,6 @@ const BookListItem = (props: Props) => {
             alert(`${buttonName}이 취소되었습니다.`);
         }
     };
-    
 
     return(
         <tr>
