@@ -10,11 +10,15 @@ export const initialState:initialStateType = {
 };
 
 export const bookReducer = (state=initialState, action:BookActionsTypes) => {
-
+    
     switch(action.type) {
         case types.ADD_BOOK_FAIL:
             return {
                 ...state,
+            }
+        case types.UPDATE_BOOK_RENT_FAIL:
+            return {
+                ...state
             }
         case types.GET_LIST_DB_REQUEST:
             return {

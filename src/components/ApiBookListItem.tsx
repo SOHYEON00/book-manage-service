@@ -11,7 +11,7 @@ const ApiBookListItem = (props:Props) => {
     const {book} = props;
     const [modalOpen, setModalOpen] = useState(false);
 
-    const onAddBookClick = (event:any) => {
+    const onAddBookClick = () => {
         modalHandler();
     };
 

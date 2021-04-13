@@ -1,24 +1,10 @@
+import { bookRentType } from 'propsTypes';
 import * as types from '../types';
 
 
-interface GetBookListDBAction {
-    type: typeof types.GET_LIST_DB_REQUEST
-}
 
-interface GetBookListDBSuccessAction {
-    type: typeof types.GET_LIST_DB_SUCCESS,
-    payload: []
-}
 
-interface GetBookListDBActionFail {
-    type: typeof types.GET_LIST_DB_FAIL,
-    payload: string
-}
-
-interface GetGoogleActionType {
-    type: typeof types.GET_GOOGLE_LIST
-}
-
+// ADD 
 interface addBookActionType {
     type: typeof types.ADD_BOOK_REQUEST,
     payload: []
@@ -39,15 +25,25 @@ export const addBookFailAction = (payload:string):addBookFailActionType => ({
     payload: payload
 });
 
-export const getGoogleAction = ():GetGoogleActionType => ({
-    type: types.GET_GOOGLE_LIST,
-});
+// GET
+interface GetBookListDBAction {
+    type: typeof types.GET_LIST_DB_REQUEST
+}
+
+interface GetBookListDBSuccessAction {
+    type: typeof types.GET_LIST_DB_SUCCESS,
+    payload: []
+}
+
+interface GetBookListDBActionFail {
+    type: typeof types.GET_LIST_DB_FAIL,
+    payload: string
+}
 
 export const getBookListDB = ():GetBookListDBAction => ({
     type: types.GET_LIST_DB_REQUEST,
 });
 
-// //data 타입 확인
 export const getBookListDBSuccess = (bookList:[]):GetBookListDBSuccessAction => ({
     type: types.GET_LIST_DB_SUCCESS,
     payload: bookList
@@ -58,11 +54,43 @@ export const getBookListDBFail = (payload:string):GetBookListDBActionFail => ({
     payload: payload
 });
 
+// UPDATE
+interface UpdateBookActionType {
+    type: typeof types.UPDATE_BOOK_RENT_REQUEST,
+    payload: bookRentType
+}
+
+interface UpdateBookSuccessActionType {
+    type: typeof types.UPDATE_BOOK_RENT_SUCCESS,
+}
+
+interface UpdateBookFailActionType {
+    type: typeof types.UPDATE_BOOK_RENT_FAIL,
+    payload: string
+}
+
+export const updateBookRentAction = (payload:bookRentType):UpdateBookActionType => ({
+    type: types.UPDATE_BOOK_RENT_REQUEST,
+    payload: payload 
+});
+
+export const updateBookRentSuccessAction = ():UpdateBookSuccessActionType => ({
+    type: types.UPDATE_BOOK_RENT_SUCCESS,
+});
+
+export const updateBookRentFailAction = (payload:''):UpdateBookFailActionType => ({
+    type: types.UPDATE_BOOK_RENT_FAIL,
+    payload: payload
+});
+
+
 export type BookActionsTypes =
     | ReturnType<typeof getBookListDB>
     | ReturnType<typeof getBookListDBSuccess>
     | ReturnType<typeof getBookListDBFail>
-    | ReturnType<typeof getGoogleAction>
     | ReturnType<typeof addBookRequestAction>
-    | ReturnType<typeof addBookFailAction>;
+    | ReturnType<typeof addBookFailAction>
+    | ReturnType<typeof updateBookRentAction>
+    | ReturnType<typeof updateBookRentSuccessAction>
+    | ReturnType<typeof updateBookRentFailAction>;
 

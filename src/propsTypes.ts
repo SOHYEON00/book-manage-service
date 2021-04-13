@@ -11,6 +11,13 @@ export interface errorType {
     message: string
 };
 
+export interface bookRentType {
+    rowNumber: number, 
+    borrower: string, 
+    borrow_date: string,
+    isRent: boolean
+};
+
 // props로 전달되는 db 내 도서 아이템 객체 타입
 export interface bookListItemType {
     title: string,
@@ -23,6 +30,7 @@ export interface bookListItemType {
     isEbook: boolean,
     isRent: boolean,
     isbn: string,
+    rowNumber: number
 };
 
 // props로 전달되는 api 결과값 도서 아이템 객체 타입
@@ -40,7 +48,7 @@ export interface apiBookItemType {
 };
 
 export interface sheetsItemType {
-    values: Array<sheetsItemValueType>
+    values: Array<sheetsItemValueType>,
 };
 
 export interface sheetsItemValueType {

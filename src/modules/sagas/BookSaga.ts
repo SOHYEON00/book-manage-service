@@ -13,12 +13,13 @@ function* getBookListDBSaga() {
         // 시트 api 응답값 중, 유의미한 데이터만 추출
         const rowValueList = filteredHasData.map((item:sheetsItemType) => {
             let rowItem:Array<string> = [];
-            
+
                 item.values.forEach((tableItem:sheetsItemValueType) => {
-                    if(tableItem.formattedValue) {
+                    if(tableItem.formattedValue) { //실제 셀에 값이 있는 경우만 처리
                         rowItem.push(tableItem.formattedValue);
                     }
                 });
+                
             return rowItem;
         });
 
@@ -26,7 +27,7 @@ function* getBookListDBSaga() {
     };
 
     try {
-        const response:[] = yield call(api.getGoogleSheetsData);
+        const response:[] = yield call(api.getGoogleSheetsData, 'bookSheet');
     
         let sheetsListData;
         response.forEach((item:any) => {
@@ -53,13 +54,24 @@ function* addBookSaga(params:any) {
     catch {
         yield put({ type: types.ADD_BOOK_FAIL, payload:'failed'});
     }
-    
+}
 
+function* updateBookRentSaga(params:any) {
+    console.log(params);
+    try {
+        const response:[] = yield call(api.updateBookRentInfo, params.payload);
+        yield put({ type: types.GET_LIST_DB_REQUEST});
+    } catch(err) {
+        yield put({ type: types.UPDATE_BOOK_RENT_FAIL, payload: err.message});
+    }
+    
+    
 }
 
 export default function* watchBookSaga() {
     // action 발생 시, saga 실행
     yield takeLatest(types.GET_LIST_DB_REQUEST, getBookListDBSaga); 
     yield takeLatest(types.ADD_BOOK_REQUEST, addBookSaga); 
+    yield takeLatest(types.UPDATE_BOOK_RENT_REQUEST, updateBookRentSaga);
 
 };

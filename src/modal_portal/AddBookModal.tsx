@@ -20,7 +20,6 @@ const ModalComponent = (props:Props) =>  {
     const [price, setPrice] = useState(book.price);
     const [url, setUrl] = useState(book.url);
 
-    // 
     const rootModal = document.getElementById('root-modal') as Element;
     const dispatch = useDispatch();
 
@@ -47,7 +46,8 @@ const ModalComponent = (props:Props) =>  {
         const thumbnail = book.thumbnail;
 
         const newBook = [title, publisher, authors, thumbnail, url, 'null', 'null', 'FALSE', 'FALSE', isbn];
-        dispatch({ type: types.ADD_BOOK_REQUEST, params:newBook});
+        dispatch({ type: types.ADD_BOOK_REQUEST, payload:newBook});
+        modalHandler();
     };
 
 

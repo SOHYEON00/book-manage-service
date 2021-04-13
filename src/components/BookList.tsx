@@ -8,14 +8,14 @@ import { RootState } from 'modules/reducers';
 
 import {titleStyle} from 'styleComponent';
 import PaginationComponent from './Pagination';
-import {LAST_PAGE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
+import {PAGE_NUMBER_ONE, PREVIEW_COUNT, POSTS_PER_PAGE} from 'modules/types';
 
 
 const BookList = () => {
     const text = useSelector((state:RootState) => state.searchReducer.text);
     const list = useSelector((state:RootState) => state.bookReducer.books);
     const [bookList, setBookList] = useState(list);
-    const [endPage, setEndPage] = useState(LAST_PAGE); // 마지막 페이지
+    const [endPage, setEndPage] = useState(PAGE_NUMBER_ONE); // 마지막 페이지
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
 
     const onClickPageBox = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,6 @@ const BookList = () => {
         
         for(let i=0; i<properties.length; i++) {
             let paramData;
-    
             if(arr[i] === 'TRUE') {
                 paramData = true;
             } else if(arr[i] === 'FALSE') {
@@ -62,6 +61,7 @@ const BookList = () => {
                 paramData = arr[i];
             }
             object[properties[i]] = paramData;
+            
         } 
         return object;
     };
@@ -75,7 +75,8 @@ const BookList = () => {
                 
                 // 모든 값이 제대로 들어온 경우만 출력하도록 처리
                 if(sheetsList[i].length === properties.length) {
-                    const object = arrToJson(sheetsList[i], properties); 
+                    let object = arrToJson(sheetsList[i], properties); 
+                    object.rowNumber = i+1; // update를 위해 rowNumber 프로퍼티 추가
                     objectsList.push(object); 
                 }
             };
@@ -89,7 +90,7 @@ const BookList = () => {
 
         if(text !== ''){ // 검색어 있는 경우, 검색어가 title로 포함된 책만 반환
             filtered = jsonBookList.filter((listItem:any) => {
-                // 시트에 값이 없는 경우 처리
+                setCurrentPage(PAGE_NUMBER_ONE); // 검색어가 있는 경우, 현재 페이지 1로 초기화
                 return listItem.title.includes(text);
 
             });

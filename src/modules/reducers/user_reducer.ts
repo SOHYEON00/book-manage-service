@@ -4,7 +4,7 @@ import * as types from '../types';
 
 const initialState = {
     userObj: {},
-    essage: ''
+    error: ''
 };
 
 export const userReducer = (state=initialState, action:UserActionTypes) => {

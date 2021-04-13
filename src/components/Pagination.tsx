@@ -18,7 +18,6 @@ const PaginationComponent = (prop:Props) => {
     const [pageBoxList, setPageBoxList] = useState<Array<pageBoxType>>([]);
     const firstPage = 1; // 첫번째 페이지
 
-    console.log(endPage, currentPage);
 
      // 현제 페이지 위치와 앞,뒤 2개의 페이지 출력 ex) ...4,5,6,7,8...
     const continueMiddlePageBox = (current:number, array:Array<pageBoxType>) => {

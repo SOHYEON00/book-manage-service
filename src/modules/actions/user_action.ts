@@ -15,6 +15,20 @@ interface LoginFailActionType {
     payload: string
 };
 
+interface AuthToHnineActionType {
+    type: typeof types.AUTH_TO_HNINE,
+    payload: object
+};
+
+interface AuthToHnineSuccessActionType {
+    type: typeof types.AUTH_TO_HNINE_SUCCESS
+};
+
+interface AuthToHnineFailActionType {
+    type: typeof types.AUTH_TO_HNINE_FAIL,
+    payload: string
+};
+
 
 // actions
 export const loginAction = ():LoginActionType => ({
@@ -29,8 +43,25 @@ export const loginFailAction = (payload:any):LoginFailActionType => ({
     payload: payload.message
 });
 
+export const authToHnineAction = (payload:userObjType):AuthToHnineActionType => ({
+    type: types.AUTH_TO_HNINE,
+    payload: payload
+});
+
+export const authToHnineSuccessAction = ():AuthToHnineSuccessActionType => ({
+    type: types.AUTH_TO_HNINE_SUCCESS
+});
+
+export const authToHnineFailAction = (payload:string):AuthToHnineFailActionType => ({
+    type: types.AUTH_TO_HNINE_FAIL,
+    payload: payload
+});
+
 export type UserActionTypes = 
     | ReturnType<typeof loginAction>
     | ReturnType<typeof loginSuccessAction>
     | ReturnType<typeof loginFailAction>
+    | ReturnType<typeof authToHnineAction>
+    | ReturnType<typeof authToHnineSuccessAction>
+    | ReturnType<typeof authToHnineFailAction>
 ;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { authInstance, authService } from "fBase";
 import * as types from 'modules/types';
+import { bookRentType } from "propsTypes";
 
 
 const init = {
@@ -15,13 +16,13 @@ export const addBookGoogleSheet = async(data:any) => {
         gapi.client.init(init)
             .then(async() => {
                 const params = {
-                    spreadsheetId: process.env.REACT_APP_SPREADSHEET_ID || "",
+                    spreadsheetId: process.env.REACT_APP_BOOK_SPREADSHEET_ID || "",
                     range: 'A1:J1',
                     valueInputOption: "RAW",
                     insertDataOption: 'INSERT_ROWS',
                 };
                 const valueRangeBody = {
-                    "values": [data.params]
+                    "values": [data.payload]
                 };
                 await gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody)
                 .then((res) => {
@@ -39,20 +40,29 @@ export const addBookGoogleSheet = async(data:any) => {
 
 
  // client.init으로 client 인증 -> sheets 정보 읽어온다.
-export const getGoogleSheetsData = async() => {
+export const getGoogleSheetsData = async(spreadType:string) => {
+    let spreadSheet:string;
+
+    if(spreadType === 'hnineSheet') {
+        spreadSheet = process.env.REACT_APP_HNINE_SPREADSHEET_ID || '';
+    } else if(spreadType === 'bookSheet') {
+        spreadSheet = process.env.REACT_APP_BOOK_SPREADSHEET_ID || '';
+    }
 
     // 성공 시, promise의 resolve()를 리턴
     return await new Promise((resolve, reject) => {
         gapi.load('client:auth2', async () => {
             try {
                 const params = {
-                    spreadsheetId: process.env.REACT_APP_SPREADSHEET_ID || '',
+                    spreadsheetId: spreadSheet || '',
                     ranges: [],
                     includeGridData: true
                 };
                gapi.client.init(init).then(async() => {
+                   
                     await gapi.client.sheets.spreadsheets.get(params)
                         .then((res) => {
+                            
                             resolve(res.result.sheets); // 요청 성공 시, resolve를 통해 api 요쳥 결과값 전달
                         })
                         .catch((err) => {console.log(err);});
@@ -65,6 +75,37 @@ export const getGoogleSheetsData = async() => {
         })
     })
 };
+
+export const updateBookRentInfo = async(data:bookRentType) => {
+    return await new Promise((resolve, reject) => {
+        gapi.client.init(init)
+            .then(async() => {
+                const strRange = `F${data.rowNumber}:H${data.rowNumber}`;
+
+                const params = {
+                    spreadsheetId: process.env.REACT_APP_BOOK_SPREADSHEET_ID || "",
+                    range: strRange,
+                    valueInputOption: "RAW"
+                };
+                const valueRangeBody = {
+                    "majorDimension": "ROWS",
+                    "values": [
+                        [data.borrower, data.borrow_date, data.isRent]
+                    ],
+                    "range": strRange,
+                };
+                
+                await gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody)
+                    .then((res) => {
+                        resolve(res.result);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        reject(err);
+                    })
+            })
+    })
+}
 
 
 // firebase를 이용한 구글 로그인 기능
