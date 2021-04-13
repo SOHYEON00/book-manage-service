@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { Navbar } from 'react-bootstrap';
 import { Button, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
-import {searchInputTextStyle, btnStyle} from 'styleComponent';
+import {searchInputTextStyle, btnStyle, navStyle} from 'styleComponent';
 import _ from 'lodash';
 
 
@@ -10,33 +11,33 @@ const Searchbar = () => {
     const [text, setText] = useState<string>('');
     const dispatch = useDispatch();
 
-    // text onChange Handler
+    // 검색어 onChangeHandler
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setText(value);
-        onDebounceChangeValue(value);
+        onDebounceChangeValue(value); // 검색어 디바운싱: 입력이 멈춘 후 800ms이 지난 후 dispatch 동작
     };
 
-    // text 상태 설정에 debounce 
+    // (1)store에 검색어 저장(엔터or버튼 누르지 않은 경우)
     const onDebounceChangeValue = useCallback(
         _.debounce((value: string) => {
             dispatch({type: types.SET_TEXT_REQUEST, payload: value});
     }, 800),[]);
 
     
-    // 검색 기능 submit handler
+    // (2)store에 검색어 저장(엔터or버튼 누른 경우)
     const onSubmitText = (event:React.FormEvent)=> {
         event.preventDefault();
-        // 검색 기능 위한 action dispatch
-        dispatch({type: types.SET_TEXT_REQUEST, payload: text}); // db 검색
+        dispatch({type: types.SET_TEXT_REQUEST, payload: text}); 
     }
 
     return(
-        
-        <Form inline onSubmit={onSubmitText}>
-            <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={searchInputTextStyle}/>
-            <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
-        </Form>
+        <Navbar style={navStyle}>
+            <Form inline onSubmit={onSubmitText}>
+                <FormControl placeholder='책 제목' type='text' value={text} onChange={onChangeValue} style={searchInputTextStyle}/>
+                <Button style={btnStyle} variant="outline-secondary" type="submit">검색</Button>
+            </Form>
+        </Navbar>
     );
 };
 

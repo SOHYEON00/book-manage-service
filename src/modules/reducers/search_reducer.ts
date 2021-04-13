@@ -15,7 +15,7 @@ export const searchReducer = (state=initialState, action:SearchActionTypes) => {
             };
         case types.SET_TEXT_FAIL:
             return {
-                ...state
+                ...state,
             };
 
         default: return { ...state };

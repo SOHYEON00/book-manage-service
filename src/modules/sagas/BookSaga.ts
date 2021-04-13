@@ -3,10 +3,10 @@ import * as api from '../api';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {sheetsItemType, sheetsItemValueType} from 'propsTypes';
 
-// // api 호출 -> 결과를 리덕스에 데이터 추가
+// 구글 시트의 도서 리스트 GET api 호출하는 사가
 function* getBookListDBSaga() {
 
-     // 구글 시트의 유의미한 데이터 리스트 만드는 함수 (row별 입력한 string)
+    // 인자로 받은 구글 시트 데이터 중, 도서 정보가 제대로 입력된 행만 리턴
     const makeBookListData = (sheetsList:Array<sheetsItemType>) => {
         const filteredHasData = sheetsList.filter(e => e.values ); // 시트 값이 있는 경우만 filter
 
@@ -19,26 +19,28 @@ function* getBookListDBSaga() {
                         rowItem.push(tableItem.formattedValue);
                     }
                 });
-                
             return rowItem;
         });
-
         return rowValueList;
     };
 
     try {
-        const response:[] = yield call(api.getGoogleSheetsData, 'bookSheet');
-    
-        let sheetsListData;
+        const response:[] = yield call(api.getGoogleSheetsData);
+        
+        // 구글 시트 중, 데이터가 있는 경우 이 변수에 담기게 된다.
+        // 배열: [[title, authors, ... ], [], ...]
+        let sheetsDataList; 
+
         response.forEach((item:any) => {
             if(item.data){ // data가 있는 경우만 출력
-                sheetsListData = makeBookListData(item.data[0].rowData)
+                sheetsDataList = makeBookListData(item.data[0].rowData)
             } else {
-                sheetsListData = []; // data가 없는 경우
+                sheetsDataList = []; // data가 없는 경우
             }
         });
-        // 전달받은 books를 스토어에 전달하기 위해 success 액션 디스패치
-        yield put({ type: types.GET_LIST_DB_SUCCESS, payload: sheetsListData}); 
+
+        // 데이터가 있는 행으로 이뤄진 리스트 변수를 스토어에 전달
+        yield put({ type: types.GET_LIST_DB_SUCCESS, payload: sheetsDataList}); 
 
     } catch (error) {
         yield put({ type: types.GET_LIST_DB_FAIL, payload: '실패함'});
@@ -48,7 +50,7 @@ function* getBookListDBSaga() {
 // 도서 추가 API 실행
 function* addBookSaga(params:any) {
     try {
-        const response:[] = yield call(api.addBookGoogleSheet, params );
+        yield call(api.addBookSheet, params );
         yield put({ type: types.GET_LIST_DB_REQUEST}); //추가 후, 변경된 시트 데이터 읽어오기
     }
     catch {
@@ -56,10 +58,10 @@ function* addBookSaga(params:any) {
     }
 }
 
+// 도서 대출/반납 시, 시트 내용 업데이트
 function* updateBookRentSaga(params:any) {
-    console.log(params);
     try {
-        const response:[] = yield call(api.updateBookRentInfo, params.payload);
+        yield call(api.updateBookRentInfo, params.payload);
         yield put({ type: types.GET_LIST_DB_REQUEST});
     } catch(err) {
         yield put({ type: types.UPDATE_BOOK_RENT_FAIL, payload: err.message});
