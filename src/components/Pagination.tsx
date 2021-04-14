@@ -31,7 +31,7 @@ const PaginationComponent = (prop:Props) => {
     const continueEndPageBox = (page1:number, page2:number, array:Array<pageBoxType>) => {
         let from;
         let to;
-
+        
         // for문 시작, 마지막 지점 정하기 위한 조건문
         if(page1 <= page2) {
             from = page1;
@@ -40,11 +40,7 @@ const PaginationComponent = (prop:Props) => {
             from = page2;
             to = page1;
         }
-
-        if(from <= 10) { // 총 페이지 넘버가 10이 넘지 않는 경우, 1~10까지 전체 출력
-            from = PAGE_NUMBER_ONE;
-        }
-
+        
         for(let i=from; i<=to; i++) {
             array.push({ pageNum: i, type: 'page'});
         }
@@ -55,7 +51,6 @@ const PaginationComponent = (prop:Props) => {
         // 페이지박스 리스트 반환
         const makePageBoxList = (firstPage:number, currentPage:number, endPage:number) => {
             let tempList:Array<pageBoxType> = [];
-
             // api 결과값이 없는 경우 (endPage === 0)
             if(endPage === 0) {
                 tempList = [];
@@ -86,8 +81,11 @@ const PaginationComponent = (prop:Props) => {
         };
 
         // 페이지네이션 출력
-        if(endPage <= 5) { // 최대 페이지가 5개인 경우: 1~5까지 모두 출력
-            const arr = continueEndPageBox(currentPage, endPage, []);
+        if(endPage === 0) { // 결과값이 없는 경우
+           setPageBoxList(makePageBoxList(PAGE_NUMBER_ONE, PAGE_NUMBER_ONE, endPage));
+        }
+        else if(endPage <= 5) { // 최대 페이지가 5개인 경우: 1~5까지 모두 출력
+            const arr = continueEndPageBox(PAGE_NUMBER_ONE, endPage, []);
             setPageBoxList(arr);
         }
         else {

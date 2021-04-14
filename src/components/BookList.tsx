@@ -15,7 +15,7 @@ const BookList = () => {
 
     const [bookList, setBookList] = useState(list);
     const [endPage, setEndPage] = useState(PAGE_NUMBER_ONE); // 마지막 페이지
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
+    const [currentPage, setCurrentPage] = useState(PAGE_NUMBER_ONE); // 현재 페이지 넘버
 
     const onClickPageBox = (e:React.MouseEvent<HTMLInputElement>) => {
         const { id } = e.currentTarget;

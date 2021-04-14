@@ -43,7 +43,7 @@ const ApiBookList = () => {
             if(currentPage > endPage) {
                 setCurrentPage(PAGE_NUMBER_ONE);
             }
-            
+
             requestApiBookList();
         } else { // 검색어 값이 없는 경우 -> 초기화
             setApiBookList([]);
