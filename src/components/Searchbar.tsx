@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Navbar } from 'react-bootstrap';
-import { Button, FormControl, Form } from 'react-bootstrap';
+import { FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import * as types from 'modules/types';
 import _ from 'lodash';

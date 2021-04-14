@@ -38,13 +38,19 @@ const ApiBookList = () => {
 
         // 검색어 값이 있는 경우 -> api 요청
         if(text !== '') {
+            
+            // 검색어가 변했을 때, 1페이지로 currentPage 변경
+            if(currentPage > endPage) {
+                setCurrentPage(PAGE_NUMBER_ONE);
+            }
+            
             requestApiBookList();
         } else { // 검색어 값이 없는 경우 -> 초기화
             setApiBookList([]);
             setEndPage(PAGE_NUMBER_ONE); 
             setCurrentPage(PAGE_NUMBER_ONE);
         }
-    }, [text, currentPage]);
+    }, [text, currentPage, endPage]);
 
     const onClickPageBox = (e:React.ChangeEvent<HTMLInputElement>) => {
         const { id } = e.target;

@@ -8,7 +8,7 @@ import 'style.scss';
 
 const App = () => {
   const {userObj, error} = useSelector((state:RootState) => state.userReducer);
-
+  
   return (
     <>
       <main>
