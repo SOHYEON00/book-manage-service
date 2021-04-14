@@ -6,7 +6,6 @@ export const initialState = {
 };
 
 export const searchReducer = (state=initialState, action:SearchActionTypes) => {
-
     switch(action.type){
         case types.SET_TEXT_REQUEST: 
             return {

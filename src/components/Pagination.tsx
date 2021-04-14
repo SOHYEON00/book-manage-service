@@ -83,9 +83,7 @@ const PaginationComponent = (prop:Props) => {
                 tempList.push({ pageNum: endPage, type: 'page'});
             }
             return tempList;
-
         };
-
 
         // 페이지네이션 출력
         if(endPage <= 5) { // 최대 페이지가 5개인 경우: 1~5까지 모두 출력

@@ -12,9 +12,9 @@ import {PAGE_NUMBER_ONE, MAX_PAGE, PREVIEW_COUNT} from 'modules/types';
 const ApiBookList = () => {
     const text = useSelector((state:RootState) => state.searchReducer.text);
 
-    const [apiBookList, setApiBookList] = useState([]);
+    const [apiBookList, setApiBookList] = useState<Array<apiBookItemType>>([]);
     const [endPage, setEndPage] = useState(PAGE_NUMBER_ONE); // 마지막 페이지
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 넘버
+    const [currentPage, setCurrentPage] = useState(PAGE_NUMBER_ONE); // 현재 페이지 넘버
 
     // 마지막 페이지 계산
     const calEndPage = (posts:number) => {

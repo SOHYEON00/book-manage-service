@@ -11,7 +11,6 @@ export const initialState:initialStateType = {
 };
 
 export const bookReducer = (state=initialState, action:BookActionsTypes) => {
-    
     switch(action.type) {
         case types.ADD_BOOK_FAIL:
             return {
